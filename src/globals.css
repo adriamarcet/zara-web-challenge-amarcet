@@ -1,0 +1,57 @@
+:root {
+  --color-gray-50: #79736D;
+  --color-gray-90: #333333;
+  --color-text: var(var(--color-gray-90));
+  font-family: "Helvetiva Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+
+  color-scheme: light;
+  color: var(--color-text);
+  background-color: white;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+.flex { display: flex; }
+.justify-content-center { justify-content: center; }
+.justify-content-between { justify-content: space-between; }
+.font-xs { font-size: 10px; }
+.font-s { font-size: 12px; }
+.text-uppercase { text-transform: uppercase; }
+
+.container {
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+  padding-inline: 16px;
+  width: 100%;
+}
+
+@media (min-width: 834px) {
+  .container {
+    margin: 0 auto;
+    max-width: 754px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1720px;
+  }
+}
+
+a {
+  color: #1D3ECF;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #172f9a;
+}
+h3 { font-weight: normal; }
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
