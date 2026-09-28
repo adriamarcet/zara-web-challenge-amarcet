@@ -3,9 +3,10 @@ import styled from 'styled-components'
 const PRODUCT_IMAGE_WIDTH = 329
 const PRODUCT_IMAGE_HEIGHT = 257
 
-const ProductGrid = styled.section`
+const ProductGrid = styled.ul`
     border: 1px solid var(--color-gray-90);
     border-bottom: 0;
+    padding: 0;
 
     @media (min-width: 834px) {
         border: 0;
@@ -19,8 +20,9 @@ const ProductGrid = styled.section`
     }
 `;
 
-const ProductCard = styled.div`
+const ProductCard = styled.li`
     border-bottom: 1px solid var(--color-gray-90);
+    list-style: none;
     padding: 16px;
     position: relative;
 
