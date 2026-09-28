@@ -9,8 +9,8 @@ import { useProducts } from './useProducts'
 
 vi.mock('../services/productsService', () => ({
   default: {
-    getAll: vi.fn()
-  }
+    getAll: vi.fn(),
+  },
 }))
 
 const wrapper = ({ children }) => (
@@ -25,7 +25,7 @@ describe('ProductsProvider', () => {
 
   test('loads and stores products successfully', async () => {
     const products = [
-      { id: '1', brand: 'Apple', name: 'iPhone 15', price: 959 }
+      { id: '1', brand: 'Apple', name: 'iPhone 15', price: 959 },
     ]
     productsService.getAll.mockResolvedValue(products)
 
@@ -67,7 +67,7 @@ describe('ProductsProvider', () => {
     await waitFor(() => {
       expect(productsService.getAll).toHaveBeenCalledTimes(2)
       expect(productsService.getAll).toHaveBeenLastCalledWith(
-        expect.objectContaining({ search: 'samsung' })
+        expect.objectContaining({ search: 'samsung' }),
       )
     })
   })

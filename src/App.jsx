@@ -5,9 +5,9 @@ import Filter from './components/Filter/Filter'
 function App() {
   return (
     <>
-    <Header />
-    <Filter />
-    <ProductList />
+      <Header />
+      <Filter />
+      <ProductList />
     </>
   )
 }

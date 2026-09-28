@@ -18,11 +18,11 @@ describe('Filter', () => {
         value={{ products: [], loading: false, setQuery: vi.fn() }}
       >
         <Filter />
-      </ProductsContext.Provider>
+      </ProductsContext.Provider>,
     )
 
     const input = screen.getByRole('searchbox', {
-      name: 'Search for a smartphone'
+      name: 'Search for a smartphone',
     })
 
     expect(input.getAttribute('placeholder')).toBe('Search for a smartphone')
@@ -37,11 +37,11 @@ describe('Filter', () => {
         value={{ products: [], loading: false, setQuery }}
       >
         <Filter />
-      </ProductsContext.Provider>
+      </ProductsContext.Provider>,
     )
 
     const input = screen.getByRole('searchbox', {
-      name: 'Search for a smartphone'
+      name: 'Search for a smartphone',
     })
     fireEvent.change(input, { target: { value: 'iphone' } })
     fireEvent.click(screen.getByRole('button', { name: 'Clear search' }))
@@ -63,7 +63,7 @@ describe('Filter', () => {
         value={{ products: [], loading: false, setQuery: vi.fn() }}
       >
         <Filter />
-      </ProductsContext.Provider>
+      </ProductsContext.Provider>,
     )
 
     expect(screen.getByRole('status').textContent).toBe('0 results')

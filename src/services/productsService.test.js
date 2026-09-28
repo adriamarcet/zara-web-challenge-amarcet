@@ -10,7 +10,7 @@ describe('productsService.getAll', () => {
   test('requests the products endpoint using GET', async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
-      json: vi.fn().mockResolvedValue([])
+      json: vi.fn().mockResolvedValue([]),
     })
     vi.stubGlobal('fetch', fetchMock)
 
@@ -26,7 +26,7 @@ describe('productsService.getAll', () => {
   test('adds the search parameter when a search value is provided', async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
-      json: vi.fn().mockResolvedValue([])
+      json: vi.fn().mockResolvedValue([]),
     })
     vi.stubGlobal('fetch', fetchMock)
 
@@ -41,7 +41,7 @@ describe('productsService.getAll', () => {
     vi.stubGlobal('fetch', fetchMock)
 
     await expect(productsService.getAll()).rejects.toThrow(
-      'Failed to fetch products'
+      'Failed to fetch products',
     )
   })
 })

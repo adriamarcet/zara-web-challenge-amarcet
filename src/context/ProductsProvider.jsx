@@ -1,45 +1,50 @@
-import { useState, useEffect } from "react";
-import { ProductsContext } from "./ProductsContext"
-import productsService from '../services/productsService';
+import { useState, useEffect } from 'react'
+import { ProductsContext } from './ProductsContext'
+import productsService from '../services/productsService'
 
 export function ProductsProvider({ children }) {
-    const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-    const [query, setQuery] = useState('')
-    
-    useEffect(() => {
-        const controller = new AbortController()
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [query, setQuery] = useState('')
 
-        async function populateProducts() {
-            try {
-                setLoading(true)
-                setError(null)
+  useEffect(() => {
+    const controller = new AbortController()
 
-                const products = await productsService.getAll({ search: query, signal: controller.signal })
- 
-                setProducts(products)
-            } catch (error) {
-                if(!controller.signal.aborted) {
-                    setError(error)
-                }
-            } finally {
-                if(!controller.signal.aborted) {
-                    setLoading(false)
-                }
-            }
+    async function populateProducts() {
+      try {
+        setLoading(true)
+        setError(null)
+
+        const products = await productsService.getAll({
+          search: query,
+          signal: controller.signal,
+        })
+
+        setProducts(products)
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          setError(error)
         }
-
-        populateProducts()
-
-        return () => {
-            controller.abort()
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false)
         }
-    }, [query])
+      }
+    }
 
-    return (
-        <ProductsContext.Provider value={{ products, loading, error, query, setQuery }}>
-            {children}
-        </ProductsContext.Provider>
-    )
+    populateProducts()
+
+    return () => {
+      controller.abort()
+    }
+  }, [query])
+
+  return (
+    <ProductsContext.Provider
+      value={{ products, loading, error, query, setQuery }}
+    >
+      {children}
+    </ProductsContext.Provider>
+  )
 }

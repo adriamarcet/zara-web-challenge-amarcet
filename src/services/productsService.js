@@ -6,9 +6,9 @@ const getAll = async ({ search = '', signal } = {}) => {
   const options = {
     method: 'GET',
     headers: {
-      'x-api-key': import.meta.env.VITE_X_API_KEY
+      'x-api-key': import.meta.env.VITE_X_API_KEY,
     },
-    signal
+    signal,
   }
 
   const params = new URLSearchParams({ limit: LIMIT })
@@ -21,7 +21,7 @@ const getAll = async ({ search = '', signal } = {}) => {
   }
 
   const data = await response.json()
-  return [...new Map(data.map(product => [product.id, product])).values()]
+  return [...new Map(data.map((product) => [product.id, product])).values()]
 }
 
 export default { getAll }

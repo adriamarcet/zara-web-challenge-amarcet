@@ -17,7 +17,7 @@ describe('ProductList', () => {
         value={{ products: [], loading: true, error: null }}
       >
         <ProductList />
-      </ProductsContext.Provider>
+      </ProductsContext.Provider>,
     )
 
     expect(screen.getByRole('status').textContent).toBe('Loading')
@@ -30,8 +30,8 @@ describe('ProductList', () => {
         brand: 'Apple',
         name: 'iPhone 15',
         basePrice: 959,
-        imageUrl: 'https://example.com/iphone-15.png'
-      }
+        imageUrl: 'https://example.com/iphone-15.png',
+      },
     ]
 
     render(
@@ -39,18 +39,16 @@ describe('ProductList', () => {
         value={{ products, loading: false, error: null }}
       >
         <ProductList />
-      </ProductsContext.Provider>
+      </ProductsContext.Provider>,
     )
 
     expect(screen.getByRole('list', { name: 'Products list' })).toBeTruthy()
     expect(screen.getAllByRole('listitem')).toHaveLength(1)
 
     const image = screen.getByRole('img', {
-      name: 'iPhone 15 by Apple'
+      name: 'iPhone 15 by Apple',
     })
-    expect(image.getAttribute('src')).toBe(
-      'https://example.com/iphone-15.png'
-    )
+    expect(image.getAttribute('src')).toBe('https://example.com/iphone-15.png')
     expect(screen.getByText('Apple')).toBeTruthy()
     expect(screen.getByText('iPhone 15')).toBeTruthy()
     expect(screen.getByText('959 EUR')).toBeTruthy()
