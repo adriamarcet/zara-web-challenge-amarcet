@@ -1,0 +1,9 @@
+:root {
+  --color-gray-50: #79736d;
+  --color-gray-90: #333333;
+
+  --color-text: var(var(--color-gray-90));
+
+  --font-size-xs: 10px;
+  --font-size-s: 12px;
+}

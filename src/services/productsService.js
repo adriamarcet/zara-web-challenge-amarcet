@@ -34,6 +34,11 @@ const getById = async (id, { signal } = {}) => {
   }
   
   const response = await fetch(`${baseUrl}/products/${id}`, options)
+
+  if (response.status === 404) {
+    return null
+  }
+
   if (!response.ok) {
     throw new Error('Failed to fetch product by ID')
   }
