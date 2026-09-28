@@ -24,4 +24,22 @@ const getAll = async ({ search = '', signal } = {}) => {
   return [...new Map(data.map((product) => [product.id, product])).values()]
 }
 
-export default { getAll }
+const getById = async (id, { signal } = {}) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      'x-api-key': import.meta.env.VITE_X_API_KEY,
+    },
+    signal,
+  }
+  
+  const response = await fetch(`${baseUrl}/products/${id}`, options)
+  if (!response.ok) {
+    throw new Error('Failed to fetch product by ID')
+  }
+
+  const data = await response.json()
+  return data
+}
+
+export default { getAll, getById }
