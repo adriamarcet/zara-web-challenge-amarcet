@@ -1,4 +1,5 @@
 import { useProducts } from '../../context/useProducts'
+import formatPrice from '../../utils/formatPrice'
 import {
   ProductGrid,
   ProductCard,
@@ -37,11 +38,6 @@ function ProductList() {
     <div className="container">
       <ProductGrid aria-label="Products list" role="list">
         {products.map((product) => {
-          const formattedPrice = new Intl.NumberFormat('en-US', {
-            maximumFractionDigits: 0,
-            useGrouping: false,
-          }).format(product.basePrice)
-
           return (
             <ProductCard
               className="product-card"
@@ -60,7 +56,7 @@ function ProductList() {
                 <p className="font-xs text-uppercase">{product.brand}</p>
                 <div className="flex justify-content-between">
                   <p className="font-s text-uppercase">{product.name}</p>
-                  <p className="font-s text-uppercase">{formattedPrice} EUR</p>
+                  <p className="font-s text-uppercase">{formatPrice(product.basePrice)} EUR</p>
                 </div>
               </div>
             </ProductCard>

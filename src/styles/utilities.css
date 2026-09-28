@@ -1,5 +1,6 @@
 
 .flex { display: flex; }
+.flex-inline { display: inline-flex; }
 .justify-content-center {
   justify-content: center;
 }
@@ -10,6 +11,8 @@
 .font-xs { font-size: var(--font-size-xs); }
 .font-s { font-size: var(--font-size-s); }
 .text-uppercase { text-transform: uppercase;}
+
+.margin-block-end-xs { margin-block-end: var(--size-xs); }
 
 .sr-only {
   position: absolute;

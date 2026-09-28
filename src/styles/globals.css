@@ -4,7 +4,7 @@
 
 :root {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
 
   color-scheme: light;
   color: var(--color-text);

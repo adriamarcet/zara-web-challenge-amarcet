@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import productsService from '../../services/productsService'
+import ProductDetailBackNav from './ProductDetailBackNav'
+import ProductDetailFeatured from './ProductDetailFeatured'
 
 function ProductDetail() {
     const { productId } = useParams()
     const [product, setProduct] = useState(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [selectedCapacity, setSelectedCapacity] = useState(null)
+    const [selectedColor, setSelectedColor] = useState(null)
 
     useEffect(() => {
         const controller = new AbortController()
@@ -18,7 +22,7 @@ function ProductDetail() {
 
             try {
                 const result = await productsService.getById(productId, {
-                signal: controller.signal,
+                    signal: controller.signal,
                 })
                 setProduct(result)
             } catch {
@@ -30,12 +34,12 @@ function ProductDetail() {
                 setLoading(false)
                 }
             }
-            }
+        }
 
-            loadProduct()
+        loadProduct()
 
-            return () => controller.abort()
-        }, [productId])
+        return () => controller.abort()
+    }, [productId])
 
     if (loading) {
         return <p role="status">Cargando producto...</p>
@@ -59,31 +63,25 @@ function ProductDetail() {
     }
 
     const image = product.colorOptions?.[0]?.imageUrl
+    const selectedStorage = product.storageOptions?.find(
+        (option) => {
+            console.log('Comparing option.capacity:', option.capacity, 'with selectedCapacity:', selectedCapacity)
+            return option.capacity === selectedCapacity
+        }
+    )
+    const displayedPrice = selectedStorage?.price ?? product.basePrice
+    const canAddToCart = selectedStorage && selectedColor
 
     return (
         <article>
-            <div className='grid'>
-                <div className='ProductDetailMedia'>
-                    {image && <img src={image} alt={`${product.name} de ${product.brand}`} />}
-                </div>
-                <div className='ProductDetailInfo'>
-                    <p>{product.brand}</p>
-                    <h1>{product.name}</h1>
-                    <p>{product.description}</p>
-                    <p>{product.basePrice} EUR</p>
-
-                    {product.specs && (
-                    <dl>
-                        {Object.entries(product.specs).map(([name, value]) => (
-                        <div key={name}>
-                            <dt>{name}</dt>
-                            <dd>{value}</dd>
-                        </div>
-                        ))}
-                    </dl>
-                )}
-                </div>
-            </div>
+            <ProductDetailBackNav />
+            <ProductDetailFeatured 
+                product={product} 
+                image={image}
+                selectedCapacity={selectedCapacity}
+                onStorageChange={setSelectedCapacity}
+                displayedPrice={displayedPrice}
+            />
         </article>
     )
 }
