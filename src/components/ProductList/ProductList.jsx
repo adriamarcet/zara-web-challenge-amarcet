@@ -9,7 +9,7 @@ import {
 function ProductList() {
     const { products, loading, error } = useProducts()
 
-    if(loading) {
+    if(loading && products.length === 0) {
         return (
             <div className="container">
                 <p>Cargando</p>
@@ -29,7 +29,7 @@ function ProductList() {
         <div className="container">
             <ProductGrid aria-label="Listado de productos">
             {products.map( (product) => (
-                <ProductCard className="product-card" key={product.id.concat('_', product.name.replace(/\s/g, '') )}>
+                <ProductCard className="product-card" key={product.id}>
                     <ProductImageWrapper className="flex justify-content-center">
                         <ProductImage src={product.imageUrl} width="329" height="257" alt={product.name} />
                     </ProductImageWrapper>

@@ -6,26 +6,25 @@ export function ProductsProvider({ children }) {
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [query, setQuery] = useState('')
     
     useEffect(() => {
-        let ignore = false
+        const controller = new AbortController()
 
         async function populateProducts() {
             try {
                 setLoading(true)
                 setError(null)
 
-                const products = await productsService.getAll()
-
-                if(!ignore) {
-                    setProducts(products)
-                }
+                const products = await productsService.getAll({ search: query, signal: controller.signal })
+ 
+                setProducts(products)
             } catch (error) {
-                if(!ignore) {
+                if(!controller.signal.aborted) {
                     setError(error)
                 }
             } finally {
-                if(!ignore) {
+                if(!controller.signal.aborted) {
                     setLoading(false)
                 }
             }
@@ -34,12 +33,12 @@ export function ProductsProvider({ children }) {
         populateProducts()
 
         return () => {
-            ignore = true
+            controller.abort()
         }
-    }, [])
+    }, [query])
 
     return (
-        <ProductsContext.Provider value={{ products, loading, error }}>
+        <ProductsContext.Provider value={{ products, loading, error, query, setQuery }}>
             {children}
         </ProductsContext.Provider>
     )

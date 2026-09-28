@@ -1,31 +1,36 @@
-import { useEffect, useState } from "react";
+import { useEffect, useOptimistic, useState } from "react";
+import { useProducts } from "../context/useProducts";
 
 const Filter = function() {
-    const [query, setQuery] = useState()
-    const [debouncedQuery, setDebouncedQuery] = useState()
+    const { products, loading, setQuery } = useProducts()
+    const [inputValue, setInputValue] = useState('')
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
-            setDebouncedQuery(query)
+            setQuery(inputValue.trim())
         }, 250)
         return () => clearTimeout(timeoutId)
-    }, [query])
-
-    useEffect(() => {
-        if(debouncedQuery) {
-            console.log('searching for:', debouncedQuery)
-        }
-    }, [debouncedQuery])
+    }, [inputValue, setQuery])
 
     const handleFilterInput = e => {
-        setQuery(e.target.value)
+        setInputValue(e.target.value)
     }
 
     return (
         <div className="container">
-            <form action="">
-                <input type="text" name="filterInput" onChange={handleFilterInput} />
+            <form onSubmit={e => e.preventDefault()} role="search">
+                <input 
+                    aria-label="Search for a smartphone" 
+                    placeholder="Search for a smartphone" 
+                    type="search"
+                    value={inputValue}
+                    name="filterInput" 
+                    onChange={handleFilterInput} 
+                />
             </form>
+            <p className="font-xs text-uppercase" aria-live="polite">
+                {loading ? 'Searching...' : `${products.length} results`}
+            </p>
         </div>
     )
 
