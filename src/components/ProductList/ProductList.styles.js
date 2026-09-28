@@ -15,7 +15,7 @@ const ProductGrid = styled.ul`
         grid-template-columns: 1fr 1fr;
     }
 
-    @media (min-width: 1420px) {
+    @media (min-width: 1920px) {
         grid-template-columns: repeat(5, 1fr);
     }
 `;
@@ -60,12 +60,12 @@ const ProductCard = styled.li`
         z-index: 0;
     }
 
-    @media (min-width: 834px) and (max-width: 1420px) {
+    @media (min-width: 834px) and (max-width: 1920px) {
         &:nth-child(2n+1) { border-inline: 1px solid var(--color-gray-90)}
         &:nth-child(2n) { border-inline-end: 1px solid var(--color-gray-90)}
     }
 
-    @media (min-width: 1420px) {
+    @media (min-width: 1920px) {
         grid-template-columns: repeat(5, 1fr);
         border-inline-end: 1px solid gray;
         &:nth-child(5n+1) {
