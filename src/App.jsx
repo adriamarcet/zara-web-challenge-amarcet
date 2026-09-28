@@ -1,4 +1,6 @@
 import { Link, Route, Routes } from 'react-router-dom'
+
+import PageLayout from './layouts/PageLayout'
 import Header from './components/Header'
 import ProductList from './components/ProductList/ProductList'
 import Filter from './components/Filter/Filter'
@@ -18,21 +20,23 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route
-          path='/'
-          element={
-            <>
-              <Filter />
-              <ProductList />
-            </>
-          }
-        />
-        <Route 
-          path='/products/:productId' element={<ProductDetail />}
-        />
-        <Route 
-          path='*' element={<NotFound />}
-        />
+        <Route element={<PageLayout />}>
+          <Route
+            path='/'
+            element={
+              <>
+                <Filter />
+                <ProductList />
+              </>
+            }
+          />
+          <Route 
+            path='/products/:productId' element={<ProductDetail />}
+          />
+          <Route 
+            path='*' element={<NotFound />}
+          />
+        </Route>
       </Routes>
     </>
   )
