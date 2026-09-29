@@ -10,7 +10,7 @@ function ProductDetail() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [selectedCapacity, setSelectedCapacity] = useState(null)
-    const [selectedColor, setSelectedColor] = useState(null)
+    // const [selectedColor, setSelectedColor] = useState(null)
 
     useEffect(() => {
         const controller = new AbortController()
@@ -42,15 +42,16 @@ function ProductDetail() {
     }, [productId])
 
     if (loading) {
-        return <p role="status">Cargando producto...</p>
+        return <p role="status">Loading product...</p>
     }
 
     if (error) {
-        return <p role="alert">No se pudo cargar el producto.</p>
-    }
-
-    if (!product) {
-        return <p role="status">No se encontró el producto.</p>
+        return (
+            <>
+                <p role="alert">Failed to load the product.</p>
+                <Link to="/">Go back to main page.</Link>
+            </>
+        )
     }
 
     if(!product) {
@@ -70,7 +71,7 @@ function ProductDetail() {
         }
     )
     const displayedPrice = selectedStorage?.price ?? product.basePrice
-    const canAddToCart = selectedStorage && selectedColor
+    // const canAddToCart = selectedStorage && selectedColor
 
     return (
         <article>
@@ -82,6 +83,16 @@ function ProductDetail() {
                 onStorageChange={setSelectedCapacity}
                 displayedPrice={displayedPrice}
             />
+            {product.specs && (
+                <dl>
+                    {Object.entries(product.specs).map(([name, value]) => (
+                    <div key={name}>
+                        <dt>{name}</dt>
+                        <dd>{value}</dd>
+                    </div>
+                    ))}
+                </dl>
+            )}
         </article>
     )
 }

@@ -10,9 +10,14 @@
 
 .font-xs { font-size: var(--font-size-xs); }
 .font-s { font-size: var(--font-size-s); }
+.font-l { font-size: var(--font-size-l); }
+
 .text-uppercase { text-transform: uppercase;}
+.font-weight-light { font-weight: var(--font-weight-light); }
+.font-weight-regular { font-weight: var(--font-weight-regular); }
 
 .margin-block-end-xs { margin-block-end: var(--size-xs); }
+.margin-block-end-l { margin-block-end: var(--size-l); }
 
 .sr-only {
   position: absolute;

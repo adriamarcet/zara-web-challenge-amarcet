@@ -1,55 +1,41 @@
 import styled from 'styled-components'
 
-const ProductDetailFeaturedElement = styled.div`
-  display: grid;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: calc(100vh - 2.75rem - 5.3125rem - 3.5rem);    
+const HeaderHeight = 80;
+const BackNavigationHeight = 44;
+const FeautredStartSeparation = 56;
+
+const ProductDetailFeaturedWrapper = styled.article`
+    display: flex;
+    flex-direction: column;
+    padding-block-start: ${FeautredStartSeparation}px;
 `
+
+const ProductDetailFeaturedElement = styled.section`
+    align-items: center;
+    display: grid;
+    gap: 40px;
+    min-height: calc(100vh - ${HeaderHeight + BackNavigationHeight + FeautredStartSeparation}px);
+}`
 
 const ProductDetailFeaturedImage = styled.img`
     max-width: 260px;
 `
 
-const ProductDetailMedia = styled.div`
+const ProductDetailFeaturedMedia = styled.div`
     display: flex;
     justify-content: start;
 `
 
-const ProductDetailInfo = styled.div`
+const ProductDetailFeaturedInfo = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-
-    h1 {
-        font-size: var(--font-size-s);
-        font-weight: var(--font-weight-semibold);
-        text-transform: uppercase;
-    }
-
-    p {
-        font-size: var(--font-size-s);
-        font-weight: var(--font-weight-light);
-    }
-
-    dl {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 0.5rem;
-
-        dt {
-            font-size: var(--font-size-xs);
-            font-weight: var(--font-weight-semibold);
-            text-transform: uppercase;
-        }
-
-        dd {
-            font-size: var(--font-size-xs);
-            font-weight: var(--font-weight-light);
-            margin-block-start: 0;
-            margin-block-end: 0;
-        }
-    }
+    gap: 40px;
 `
 
-export { ProductDetailFeaturedElement, ProductDetailFeaturedImage, ProductDetailMedia, ProductDetailInfo }
+export { 
+    ProductDetailFeaturedWrapper,
+    ProductDetailFeaturedElement, 
+    ProductDetailFeaturedImage, 
+    ProductDetailFeaturedMedia, 
+    ProductDetailFeaturedInfo
+}

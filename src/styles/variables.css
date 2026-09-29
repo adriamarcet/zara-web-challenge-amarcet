@@ -1,4 +1,6 @@
 :root {
+  --color-white: #FFFFFF;
+  --color-gray-10: #CCCCCC;
   --color-gray-50: #79736d;
   --color-gray-90: #333333;
 
@@ -10,8 +12,10 @@
   --font-size-xs: 10px;
   --font-size-s: 12px;
 
-  --size-m: 16px;
-  --size-xs: 12px;
-  --size-1xs: 8px;
   --size-2xs: 4px;
+  --size-1xs: 8px;
+  --size-xs: 12px;
+  --size-s: 14px;
+  --size-m: 16px;
+  --size-l: 20px;
 }

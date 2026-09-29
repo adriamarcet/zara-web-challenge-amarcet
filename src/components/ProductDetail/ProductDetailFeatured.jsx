@@ -1,38 +1,41 @@
 import formatPrice from '../../utils/formatPrice'
-import { ProductDetailFeaturedElement, ProductDetailMedia, ProductDetailFeaturedImage, ProductDetailInfo } from './ProductDetailFeatured.styles'
+import { 
+    ProductDetailFeaturedWrapper, 
+    ProductDetailFeaturedElement, 
+    ProductDetailFeaturedMedia, 
+    ProductDetailFeaturedImage, 
+    ProductDetailFeaturedInfo 
+} from './ProductDetailFeatured.styles'
 import StorageSelector from './StorageSelector'
 
 const ProductDetailFeatured = ({ product, image, selectedCapacity, onStorageChange, displayedPrice }) => {
 
     return (
-        <ProductDetailFeaturedElement>
-            <ProductDetailMedia>
-                {image && <ProductDetailFeaturedImage src={image} alt={`${product.name} de ${product.brand}`} />}
-            </ProductDetailMedia>
-            <ProductDetailInfo>
-                <h1>{product.name}</h1>
-                <p>From {product.description}</p>
-                <p>{formatPrice(product.basePrice)} EUR</p>
-                <StorageSelector
-                    storageOptions={product.storageOptions}
-                    selectedCapacity={selectedCapacity}
-                    onStorageChange={onStorageChange}
-                />
-                <p>Displayed price: {formatPrice(displayedPrice)} EUR</p>
-
-                {selectedCapacity && <p>Selected capacity: {selectedCapacity}</p>}
-                {product.specs && (
-                <dl>
-                    {Object.entries(product.specs).map(([name, value]) => (
-                    <div key={name}>
-                        <dt>{name}</dt>
-                        <dd>{value}</dd>
+        <ProductDetailFeaturedWrapper>
+            <ProductDetailFeaturedElement>
+                <ProductDetailFeaturedMedia>
+                    {image && <ProductDetailFeaturedImage src={image} alt={`${product.name} de ${product.brand}`} />}
+                </ProductDetailFeaturedMedia>
+                <ProductDetailFeaturedInfo>
+                    <div>
+                        <h1 className="font-l text-uppercase font-weight-light margin-block-end-xs">{product.name}</h1>
+                        <p className="font-s font-weight-light">From {formatPrice(displayedPrice)} EUR</p>
                     </div>
-                    ))}
-                </dl>
-            )}
-            </ProductDetailInfo>
-        </ProductDetailFeaturedElement>
+                    <div>
+                        <StorageSelector
+                            storageOptions={product.storageOptions}
+                            selectedCapacity={selectedCapacity}
+                            onStorageChange={onStorageChange}
+                        />
+                    </div>
+                    <div>
+                        <button className="btn btn-primary" disabled={!selectedCapacity}>
+                            Add to cart
+                        </button>
+                    </div>
+                </ProductDetailFeaturedInfo>
+            </ProductDetailFeaturedElement>
+        </ProductDetailFeaturedWrapper>
     )
 }
 

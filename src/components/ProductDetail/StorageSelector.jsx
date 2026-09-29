@@ -1,23 +1,30 @@
-import formatPrice from '../../utils/formatPrice'
+import { StorageSelectorLabel, StorageSelectorInput, StorageSelectorLabelWrapper } from './StorageSelector.styles'
 
 const StorageSelector = ({ storageOptions, selectedCapacity, onStorageChange }) => {
     return (
         <>
-            <p>Storage ¿How much space do you need?</p>
             <fieldset>
-                <legend className="sr-only">Storage options</legend>
-                {storageOptions?.map((option) => (
-                    <label key={option.capacity}>
-                        <input
-                            type="radio"
-                            name="storage"
-                            value={option.capacity}
-                            checked={selectedCapacity === option.capacity}
-                            onChange={() => onStorageChange(option.capacity)}
-                        />
-                        {option.capacity} - {formatPrice(option.price)} EUR
-                    </label>
-                ))}
+                <legend className="font-s font-weight-light text-uppercase margin-block-end-l">Storage ¿How much space do you need?</legend>
+                <StorageSelectorLabelWrapper>
+                    {storageOptions?.map((option) => (
+                            <StorageSelectorLabel key={option.capacity}>
+                                <input
+                                    type="radio"
+                                    checked={selectedCapacity === option.capacity}
+                                    className="sr-only"
+                                    name="storage"
+                                    onChange={() => onStorageChange(option.capacity)}
+                                    value={option.capacity}
+                                />
+                                <StorageSelectorInput 
+                                    className="font-s font-weight-light text-uppercase" 
+                                    aria-hidden="true"
+                                >
+                                    {option.capacity}
+                                </StorageSelectorInput>
+                            </StorageSelectorLabel>
+                    ))}
+                </StorageSelectorLabelWrapper>
             </fieldset>
         </>
     )

@@ -21,6 +21,8 @@ a {
 a:hover {
   color: #172f9a;
 }
+h1,
+h2,
 h3 {
   font-weight: normal;
 }
