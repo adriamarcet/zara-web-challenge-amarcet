@@ -1,4 +1,3 @@
-
 .button {
   --color-bg-disabled: var(--color-gray-10);
 
@@ -17,8 +16,12 @@
     color 0.2s ease;
 }
 
-.button:disabled { cursor: not-allowed; }
-.button--full { width: 100%; }
+.button:disabled {
+  cursor: not-allowed;
+}
+.button--full {
+  width: 100%;
+}
 
 .button--primary {
   background-color: var(--color-gray-90);
@@ -26,18 +29,15 @@
   color: var(--color-white);
 }
 
-.button--primary:hover {
-    cursor: pointer;
-}
-
 .button--primary:not(:disabled):hover {
+  cursor: pointer;
   opacity: 0.8;
 }
 
 .button--primary:disabled {
   background-color: var(--color-bg-disabled);
   border-color: var(--color-bg-disabled);
-  color: var(--color-gray-50);
+  color: var(--color-text-disabled);
 }
 
 .button--secondary {

@@ -1,11 +1,6 @@
 import { useProducts } from '../../context/useProducts'
-import formatPrice from '../../utils/formatPrice'
-import {
-  ProductGrid,
-  ProductCard,
-  ProductImageWrapper,
-  ProductImage,
-} from './ProductList.styles'
+import ProductCardItem from '../ProductCardItem/ProductCardItem'
+import { ProductGrid } from './ProductList.styles'
 
 function ProductList() {
   const { products, loading, error } = useProducts()
@@ -37,31 +32,9 @@ function ProductList() {
   return (
     <div className="container">
       <ProductGrid aria-label="Products list" role="list">
-        {products.map((product) => {
-          return (
-            <ProductCard
-              className="product-card"
-              key={product.id}
-              role="listitem"
-            >
-              <ProductImageWrapper className="flex justify-content-center">
-                <ProductImage
-                  src={product.imageUrl}
-                  width="329"
-                  height="257"
-                  alt={product.name + ' by ' + product.brand}
-                />
-              </ProductImageWrapper>
-              <div className="textInfo">
-                <p className="font-xs text-uppercase">{product.brand}</p>
-                <div className="flex justify-content-between">
-                  <p className="font-s text-uppercase">{product.name}</p>
-                  <p className="font-s text-uppercase">{formatPrice(product.basePrice)} EUR</p>
-                </div>
-              </div>
-            </ProductCard>
-          )
-        })}
+        {products.map((product) => (
+          <ProductCardItem key={product.id} product={product} />
+        ))}
       </ProductGrid>
     </div>
   )

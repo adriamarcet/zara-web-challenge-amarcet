@@ -1,0 +1,54 @@
+@value breakpointMobile: 393px;
+@value breakpointTablet: 768px;
+@value breakpointDesktop: 1024px;
+
+:root {
+  --breakpoint-mobile: breakpointMobile;
+  --breakpoint-tablet: breakpointTablet;
+  --breakpoint-desktop: breakpointDesktop;
+
+  --color-white: #ffffff;
+  --color-gray-10: #f3f2f2;
+  --color-gray-20: #cccccc;
+  --color-gray-50: #79736d;
+  --color-gray-90: #333333;
+
+  --color-text: var(--color-gray-90);
+  --color-text-disabled: #666666;
+
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-size-xs: 10px;
+  --font-size-s: 12px;
+  --font-size-m: 14px;
+  --font-size-l: 16px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+
+  --size-3xs: 2px;
+  --size-2xs: 4px;
+  --size-1xs: 8px;
+  --size-xs: 12px;
+  --size-s: 14px;
+  --size-m: 16px;
+  --size-l: 20px;
+  --size-xl: 30px;
+  --size-2xl: 40px;
+
+  --container-margin-inline: 0;
+  --container-max-width: 100%;
+}
+
+@media (min-width: breakpointTablet) {
+  :root {
+    --container-margin-inline: auto;
+    --container-max-width: 754px;
+  }
+}
+
+@media (min-width: breakpointDesktop) {
+  :root {
+    --container-max-width: 1720px;
+  }
+}

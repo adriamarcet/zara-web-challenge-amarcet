@@ -2,9 +2,20 @@
 
 import { cleanup, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, test } from 'vitest'
+import { MemoryRouter } from 'react-router-dom'
 
 import { ProductsContext } from '../../context/ProductsContext'
 import ProductList from './ProductList'
+
+function renderProductList(value) {
+  return render(
+    <MemoryRouter>
+      <ProductsContext.Provider value={value}>
+        <ProductList />
+      </ProductsContext.Provider>
+    </MemoryRouter>
+  )
+}
 
 describe('ProductList', () => {
   afterEach(() => {
@@ -12,13 +23,7 @@ describe('ProductList', () => {
   })
 
   test('shows Loading when products are empty and loading is true', () => {
-    render(
-      <ProductsContext.Provider
-        value={{ products: [], loading: true, error: null }}
-      >
-        <ProductList />
-      </ProductsContext.Provider>,
-    )
+    renderProductList({ products: [], loading: true, error: null })
 
     expect(screen.getByRole('status').textContent).toBe('Loading')
   })
@@ -34,13 +39,7 @@ describe('ProductList', () => {
       },
     ]
 
-    render(
-      <ProductsContext.Provider
-        value={{ products, loading: false, error: null }}
-      >
-        <ProductList />
-      </ProductsContext.Provider>,
-    )
+    renderProductList({ products, loading: false, error: null })
 
     expect(screen.getByRole('list', { name: 'Products list' })).toBeTruthy()
     expect(screen.getAllByRole('listitem')).toHaveLength(1)
@@ -52,5 +51,8 @@ describe('ProductList', () => {
     expect(screen.getByText('Apple')).toBeTruthy()
     expect(screen.getByText('iPhone 15')).toBeTruthy()
     expect(screen.getByText('959 EUR')).toBeTruthy()
+
+    const productLink = screen.getByRole('link')
+    expect(productLink.getAttribute('href')).toBe('/products/1')
   })
 })

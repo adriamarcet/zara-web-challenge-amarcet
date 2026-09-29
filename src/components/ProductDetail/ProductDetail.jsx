@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import productsService from '../../services/productsService'
-import ProductDetailBackNav from './ProductDetailBackNav'
-import ProductDetailFeatured from './ProductDetailFeatured'
-import ProductDetailSpecs from './ProductDetailSpecs'
+import ProductDetailBackNav from './ProductDetailBackNav/ProductDetailBackNav'
+import ProductDetailFeatured from './ProductDetailFeatured/ProductDetailFeatured'
+import ProductDetailSimilarItems from './ProductDetailSimilarItems/ProductDetailSimilarItems'
+import ProductDetailSpecs from './ProductDetailSpecs/ProductDetailSpecs'
 
 function ProductDetail() {
     const { productId } = useParams()
@@ -98,6 +99,7 @@ function ProductDetail() {
                 canAddToCart={canAddToCart}
             />
             <ProductDetailSpecs product={product} />
+            <ProductDetailSimilarItems products={product.similarProducts} />
         </article>
     )
 }
