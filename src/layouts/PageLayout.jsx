@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 
 function PageLayout() {
   return (
-    <main className="container">
+    <main>
       <Outlet />
     </main>
   )

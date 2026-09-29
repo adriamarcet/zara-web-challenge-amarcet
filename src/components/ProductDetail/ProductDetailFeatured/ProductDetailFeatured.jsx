@@ -21,6 +21,7 @@ const ProductDetailFeatured = ({
   onColorChange,
   selectedColorName,
   canAddToCart,
+  onAddToCart,
 }) => {
   return (
     <ProductDetailFeaturedWrapper>
@@ -63,6 +64,7 @@ const ProductDetailFeatured = ({
               type="button"
               className="button button--primary button--full"
               disabled={!canAddToCart}
+              onClick={onAddToCart}
             >
               Add to cart
             </button>

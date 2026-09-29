@@ -5,13 +5,14 @@ import Header from './components/Header'
 import ProductList from './components/ProductList/ProductList'
 import Filter from './components/Filter/Filter'
 import ProductDetail from './components/ProductDetail/ProductDetail'
+import CartPage from './components/Cart/CartPage'
 
 function NotFound() {
   return (
-    <main className="container">
+    <section className="container">
       <h1>Page not found</h1>
       <Link to="/">Go back to main page.</Link>
-    </main>
+    </section>
   )
 }
 
@@ -22,7 +23,7 @@ function App() {
       <Routes>
         <Route element={<PageLayout />}>
           <Route
-            path='/'
+            path="/"
             element={
               <>
                 <Filter />
@@ -30,12 +31,9 @@ function App() {
               </>
             }
           />
-          <Route 
-            path='/products/:productId' element={<ProductDetail />}
-          />
-          <Route 
-            path='*' element={<NotFound />}
-          />
+          <Route path="/products/:productId" element={<ProductDetail />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </>

@@ -1,6 +1,6 @@
 import { useProducts } from '../../context/useProducts'
 import ProductCardItem from '../ProductCardItem/ProductCardItem'
-import { ProductGrid } from './ProductList.styles'
+import { ProductGrid, ProductListContainer } from './ProductList.styles'
 
 function ProductList() {
   const { products, loading, error } = useProducts()
@@ -30,13 +30,13 @@ function ProductList() {
   }
 
   return (
-    <div className="container">
+    <ProductListContainer className="container">
       <ProductGrid aria-label="Products list" role="list">
         {products.map((product) => (
           <ProductCardItem key={product.id} product={product} />
         ))}
       </ProductGrid>
-    </div>
+    </ProductListContainer>
   )
 }
 

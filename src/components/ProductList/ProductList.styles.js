@@ -1,6 +1,12 @@
 import styled from 'styled-components'
 import { MEDIA_QUERIES } from '../../styles/breakpoints'
 
+const ProductListContainer = styled.div`
+  padding-block-end: calc(
+    (var(--size-xl) * 2) + env(safe-area-inset-bottom, 0px)
+  );
+`
+
 const ProductGrid = styled.ul`
   border: 1px solid var(--color-gray-90);
   border-bottom: 0;
@@ -27,4 +33,4 @@ const ProductGrid = styled.ul`
   }
 `
 
-export { ProductGrid }
+export { ProductGrid, ProductListContainer }

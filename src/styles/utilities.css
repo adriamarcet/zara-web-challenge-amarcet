@@ -61,8 +61,6 @@
 }
 
 .container {
-  align-items: center;
-  justify-content: space-between;
   margin-inline: var(--container-margin-inline);
   max-width: var(--container-max-width);
   padding-inline: 16px;
