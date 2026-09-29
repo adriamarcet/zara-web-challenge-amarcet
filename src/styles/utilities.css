@@ -16,8 +16,11 @@
 .font-weight-light { font-weight: var(--font-weight-light); }
 .font-weight-regular { font-weight: var(--font-weight-regular); }
 
+.padding-block-start-xl { padding-block-start: var(--size-xl); }
 .margin-block-end-xs { margin-block-end: var(--size-xs); }
 .margin-block-end-l { margin-block-end: var(--size-l); }
+.margin-block-end-xl { margin-block-end: var(--size-xl); }
+.margin-block-end-2xl { margin-block-end: var(--size-2xl); }
 
 .sr-only {
   position: absolute;

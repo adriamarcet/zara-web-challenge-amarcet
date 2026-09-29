@@ -1,6 +1,7 @@
 @import "./variables.css";
 @import "./reset.css";
 @import "./utilities.css";
+@import "./buttons.css";
 
 :root {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;

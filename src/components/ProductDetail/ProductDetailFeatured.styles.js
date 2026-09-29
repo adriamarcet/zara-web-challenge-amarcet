@@ -4,13 +4,13 @@ const HeaderHeight = 80;
 const BackNavigationHeight = 44;
 const FeautredStartSeparation = 56;
 
-const ProductDetailFeaturedWrapper = styled.article`
+const ProductDetailFeaturedWrapper = styled.section`
     display: flex;
     flex-direction: column;
     padding-block-start: ${FeautredStartSeparation}px;
 `
 
-const ProductDetailFeaturedElement = styled.section`
+const ProductDetailFeaturedElement = styled.div`
     align-items: center;
     display: grid;
     gap: 40px;
@@ -18,7 +18,7 @@ const ProductDetailFeaturedElement = styled.section`
 }`
 
 const ProductDetailFeaturedImage = styled.img`
-    max-width: 260px;
+    max-width: 220px;
 `
 
 const ProductDetailFeaturedMedia = styled.div`

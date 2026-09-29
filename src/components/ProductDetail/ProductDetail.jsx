@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import productsService from '../../services/productsService'
 import ProductDetailBackNav from './ProductDetailBackNav'
 import ProductDetailFeatured from './ProductDetailFeatured'
+import ProductDetailSpecs from './ProductDetailSpecs'
 
 function ProductDetail() {
     const { productId } = useParams()
@@ -10,7 +11,7 @@ function ProductDetail() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [selectedCapacity, setSelectedCapacity] = useState(null)
-    // const [selectedColor, setSelectedColor] = useState(null)
+    const [selectedColorName, setSelectedColorName] = useState(null)
 
     useEffect(() => {
         const controller = new AbortController()
@@ -19,6 +20,8 @@ function ProductDetail() {
             setLoading(true)
             setError(false)
             setProduct(null)
+            setSelectedCapacity(null)
+            setSelectedColorName(null)
 
             try {
                 const result = await productsService.getById(productId, {
@@ -63,7 +66,14 @@ function ProductDetail() {
         )
     }
 
-    const image = product.colorOptions?.[0]?.imageUrl
+    const selectedColor = product.colorOptions?.find(
+        option => option.name === selectedColorName,
+    )
+
+    const image =
+        selectedColor?.imageUrl ??
+        product.colorOptions?.[0]?.imageUrl
+
     const selectedStorage = product.storageOptions?.find(
         (option) => {
             console.log('Comparing option.capacity:', option.capacity, 'with selectedCapacity:', selectedCapacity)
@@ -71,7 +81,8 @@ function ProductDetail() {
         }
     )
     const displayedPrice = selectedStorage?.price ?? product.basePrice
-    // const canAddToCart = selectedStorage && selectedColor
+    
+    const canAddToCart = Boolean(selectedStorage && selectedColor)
 
     return (
         <article>
@@ -82,17 +93,11 @@ function ProductDetail() {
                 selectedCapacity={selectedCapacity}
                 onStorageChange={setSelectedCapacity}
                 displayedPrice={displayedPrice}
+                selectedColorName={selectedColorName}
+                onColorChange={setSelectedColorName}
+                canAddToCart={canAddToCart}
             />
-            {product.specs && (
-                <dl>
-                    {Object.entries(product.specs).map(([name, value]) => (
-                    <div key={name}>
-                        <dt>{name}</dt>
-                        <dd>{value}</dd>
-                    </div>
-                    ))}
-                </dl>
-            )}
+            <ProductDetailSpecs product={product} />
         </article>
     )
 }

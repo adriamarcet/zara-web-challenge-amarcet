@@ -7,8 +7,18 @@ import {
     ProductDetailFeaturedInfo 
 } from './ProductDetailFeatured.styles'
 import StorageSelector from './StorageSelector'
+import ColorSelector from './ColorSelector'
 
-const ProductDetailFeatured = ({ product, image, selectedCapacity, onStorageChange, displayedPrice }) => {
+const ProductDetailFeatured = ({ 
+    product, 
+    image, 
+    selectedCapacity, 
+    onStorageChange, 
+    displayedPrice,
+    onColorChange,
+    selectedColorName,
+    canAddToCart
+}) => {
 
     return (
         <ProductDetailFeaturedWrapper>
@@ -19,7 +29,11 @@ const ProductDetailFeatured = ({ product, image, selectedCapacity, onStorageChan
                 <ProductDetailFeaturedInfo>
                     <div>
                         <h1 className="font-l text-uppercase font-weight-light margin-block-end-xs">{product.name}</h1>
-                        <p className="font-s font-weight-light">From {formatPrice(displayedPrice)} EUR</p>
+                        <p 
+                            className="font-s font-weight-light"
+                            aria-live="polite" 
+                            aria-atomic="true"
+                        >From {formatPrice(displayedPrice)} EUR</p>
                     </div>
                     <div>
                         <StorageSelector
@@ -27,9 +41,18 @@ const ProductDetailFeatured = ({ product, image, selectedCapacity, onStorageChan
                             selectedCapacity={selectedCapacity}
                             onStorageChange={onStorageChange}
                         />
+                        <ColorSelector
+                            colorOptions={product.colorOptions}
+                            selectedColorName={selectedColorName}
+                            onColorChange={onColorChange}
+                        />
                     </div>
                     <div>
-                        <button className="btn btn-primary" disabled={!selectedCapacity}>
+                        <button 
+                            type="button"
+                            className="button button--primary button--full"
+                            disabled={!canAddToCart}
+                        >
                             Add to cart
                         </button>
                     </div>

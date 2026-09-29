@@ -10,7 +10,7 @@ const StorageSelectorLabel = styled.label`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    border: 1px solid var(--color-gray-10);
+    border: 1px solid var(--color-gray-20);
 
     text-transform: uppercase;
     transition: all 0.2s ease-in-out;

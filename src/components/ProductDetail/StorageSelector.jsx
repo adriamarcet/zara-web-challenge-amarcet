@@ -3,7 +3,7 @@ import { StorageSelectorLabel, StorageSelectorInput, StorageSelectorLabelWrapper
 const StorageSelector = ({ storageOptions, selectedCapacity, onStorageChange }) => {
     return (
         <>
-            <fieldset>
+            <fieldset className="margin-block-end-xl">
                 <legend className="font-s font-weight-light text-uppercase margin-block-end-l">Storage ¿How much space do you need?</legend>
                 <StorageSelectorLabelWrapper>
                     {storageOptions?.map((option) => (
@@ -17,11 +17,11 @@ const StorageSelector = ({ storageOptions, selectedCapacity, onStorageChange }) 
                                     value={option.capacity}
                                 />
                                 <StorageSelectorInput 
-                                    className="font-s font-weight-light text-uppercase" 
-                                    aria-hidden="true"
+                                    className="font-s font-weight-light text-uppercase"
                                 >
                                     {option.capacity}
                                 </StorageSelectorInput>
+                                <span className="sr-only">{option.name}</span>
                             </StorageSelectorLabel>
                     ))}
                 </StorageSelectorLabelWrapper>
