@@ -1,0 +1,16 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+  # The API key is embedded in the client bundle by design (Vite exposes
+  # VITE_* variables), so Netlify's secrets scanner must not fail the build.
+  SECRETS_SCAN_OMIT_KEYS = "VITE_X_API_KEY"
+
+# Client-side routing: serve the SPA for deep links such as /cart or
+# /products/:productId.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

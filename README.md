@@ -343,9 +343,11 @@ Use the following build settings:
 | Environment variable | `VITE_X_API_KEY` |
 
 Because the application uses `BrowserRouter`, the host must rewrite unknown
-paths such as `/products/:productId` and `/cart` to `/index.html`. Configure the
-same API key in the deployment environment before building, then verify the
-production output locally with:
+paths such as `/products/:productId` and `/cart` to `/index.html`. The included
+`netlify.toml` already sets the build command, output directory, Node 24 and
+this rewrite, so on Netlify only `VITE_X_API_KEY` needs to be added in the site's
+environment variables. On other hosts, configure the same rewrite manually.
+Verify the production output locally with:
 
 ```bash
 npm run build
