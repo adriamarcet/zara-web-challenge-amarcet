@@ -31,6 +31,10 @@ const ProductDetailFeatured = ({
             <ProductDetailFeaturedImage
               src={image}
               alt={`${product.name} de ${product.brand}`}
+              width="1080"
+              height="1080"
+              loading="eager"
+              fetchPriority="high"
             />
           )}
         </ProductDetailFeaturedMedia>

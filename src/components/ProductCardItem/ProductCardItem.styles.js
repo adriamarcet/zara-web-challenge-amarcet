@@ -1,8 +1,19 @@
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+import ProductImage from '../ProductImage/ProductImage'
 
 const PRODUCT_IMAGE_WIDTH = 329
 const PRODUCT_IMAGE_HEIGHT = 257
+
+const skeletonPulse = keyframes`
+  from {
+    opacity: 0.55;
+  }
+
+  to {
+    opacity: 1;
+  }
+`
 
 const ProductCardInfo = styled.div`
   flex: 0 0 auto;
@@ -75,10 +86,70 @@ const ProductCardImageWrapper = styled.div`
   z-index: 1;
 `
 
-const ProductCardImage = styled.img`
+const ProductCardImageSkeleton = styled.div`
+  aspect-ratio: 9 / 18.5;
+  background-color: var(--color-gray-20);
+  border: 1px solid var(--color-gray-20);
+  border-radius: 14px;
+  height: 78%;
+  left: 50%;
+  max-height: 220px;
+  opacity: ${({ $loaded }) => ($loaded ? 0 : 1)};
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 200ms ease-out;
+
+  &::before {
+    animation: ${skeletonPulse} 900ms ease-in-out infinite alternate;
+    animation-play-state: ${({ $loaded }) => ($loaded ? 'paused' : 'running')};
+    background-color: var(--color-gray-10);
+    border-radius: 9px;
+    content: '';
+    inset: 6px;
+    position: absolute;
+  }
+
+  &::after {
+    background-color: var(--color-gray-20);
+    border-radius: 999px;
+    content: '';
+    height: 4px;
+    left: 50%;
+    position: absolute;
+    top: 9px;
+    transform: translateX(-50%);
+    width: 24px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &::before {
+      animation: none;
+    }
+  }
+`
+
+const ProductCardImage = styled(ProductImage)`
+  display: flex;
   height: 100%;
-  object-fit: contain;
+  opacity: ${({ $loaded }) => ($loaded ? 1 : 0)};
+  position: relative;
+  transition: opacity 200ms ease-out;
   width: 100%;
+  z-index: 1;
+
+  > img {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `
 
 const ProductCardSummary = styled.div`
@@ -91,6 +162,7 @@ export {
   ProductCardItemElement,
   ProductCardItemLink,
   ProductCardImage,
+  ProductCardImageSkeleton,
   ProductCardImageWrapper,
   ProductCardInfo,
   ProductCardSummary,

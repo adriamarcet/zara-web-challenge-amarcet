@@ -1,17 +1,29 @@
 // @vitest-environment jsdom
 
-import { cleanup, render, screen } from '@testing-library/react'
-import { afterEach, describe, expect, test } from 'vitest'
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react'
+import { afterEach, describe, expect, test, vi } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 
+import { optimizeProductImage } from '../ProductImage/optimizeProductImage'
 import ProductCardItem from './ProductCardItem'
+
+vi.mock('../ProductImage/optimizeProductImage', () => ({
+  optimizeProductImage: vi.fn(),
+}))
 
 describe('ProductCardItem', () => {
   afterEach(() => {
     cleanup()
+    vi.clearAllMocks()
   })
 
-  test('renders the product information and links to its detail page', () => {
+  test('renders the product information and links to its detail page', async () => {
     const product = {
       id: 'APL-IP15',
       brand: 'Apple',
@@ -19,6 +31,7 @@ describe('ProductCardItem', () => {
       basePrice: 959,
       imageUrl: 'https://example.com/iphone-15.png',
     }
+    optimizeProductImage.mockResolvedValue(product.imageUrl)
 
     render(
       <MemoryRouter>
@@ -40,5 +53,17 @@ describe('ProductCardItem', () => {
       name: 'iPhone 15 by Apple',
     })
     expect(image.getAttribute('src')).toBe(product.imageUrl)
+
+    const skeleton = screen.getByTestId('product-image-skeleton')
+
+    expect(skeleton.tagName).toBe('DIV')
+    expect(getComputedStyle(skeleton).opacity).toBe('1')
+
+    fireEvent.load(image)
+
+    await waitFor(() => {
+      expect(getComputedStyle(skeleton).opacity).toBe('0')
+      expect(getComputedStyle(image.parentElement).opacity).toBe('1')
+    })
   })
 })

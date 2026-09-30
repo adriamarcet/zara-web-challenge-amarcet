@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { MEDIA_QUERIES } from '../../../styles/breakpoints'
+import ProductImage from '../../ProductImage/ProductImage'
 
 export const CartItemElement = styled.li`
   display: grid;
@@ -22,10 +23,16 @@ export const CartItemMedia = styled.div`
   min-width: 0;
 `
 
-export const CartItemImage = styled.img`
+export const CartItemImage = styled(ProductImage)`
+  display: flex;
   height: 100%;
-  object-fit: contain;
   width: 100%;
+
+  > img {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+  }
 `
 
 export const CartItemInfo = styled.div`

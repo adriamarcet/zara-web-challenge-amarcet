@@ -32,8 +32,13 @@ function ProductList() {
   return (
     <ProductListContainer className="container">
       <ProductGrid aria-label="Products list" role="list">
-        {products.map((product) => (
-          <ProductCardItem key={product.id} product={product} />
+        {products.map((product, index) => (
+          <ProductCardItem
+            key={product.id}
+            product={product}
+            imageLoading={index < 5 ? 'eager' : 'lazy'}
+            imageFetchPriority={index === 0 ? 'high' : 'auto'}
+          />
         ))}
       </ProductGrid>
     </ProductListContainer>

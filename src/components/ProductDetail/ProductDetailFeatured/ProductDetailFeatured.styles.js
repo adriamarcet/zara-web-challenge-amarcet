@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { MEDIA_QUERIES } from '../../../styles/breakpoints'
+import ProductImage from '../../ProductImage/ProductImage'
 
 const HEADER_HEIGHT = 80
 const BACK_NAVIGATION_HEIGHT = 44
@@ -41,10 +42,17 @@ const ProductDetailFeaturedElement = styled.div`
   }
 `
 
-const ProductDetailFeaturedImage = styled.img`
+const ProductDetailFeaturedImage = styled(ProductImage)`
+  aspect-ratio: 1;
+  display: flex;
   max-width: 220px;
-  object-fit: contain;
   width: 100%;
+
+  > img {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+  }
 
   @media ${MEDIA_QUERIES.tablet} {
     max-width: 344px;
