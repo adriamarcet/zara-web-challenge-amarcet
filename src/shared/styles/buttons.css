@@ -7,7 +7,7 @@
   padding: var(--size-s) var(--size-l);
   border: 1px solid transparent;
   font-size: var(--font-size-s);
-  font-weight: var(--font-weight-thin);
+  font-weight: var(--font-weight-light);
   text-transform: uppercase;
   text-align: center;
   transition:
@@ -25,7 +25,7 @@
 
 .button--primary {
   background-color: var(--color-gray-90);
-  border-color: var(--color-text-primary);
+  border-color: var(--color-gray-90);
   color: var(--color-white);
 }
 
@@ -38,15 +38,4 @@
   background-color: var(--color-bg-disabled);
   border-color: var(--color-bg-disabled);
   color: var(--color-text-disabled);
-}
-
-.button--secondary {
-  background-color: transparent;
-  border-color: var(--color-text-primary);
-  color: var(--color-text-primary);
-}
-
-.button--secondary:not(:disabled):hover {
-  background-color: var(--color-text-primary);
-  color: var(--color-bg-primary);
 }

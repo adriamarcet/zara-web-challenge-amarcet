@@ -40,12 +40,3 @@ export {
   StorageSelectorInput,
   StorageSelectorLabelWrapper,
 }
-
-// @include breakpoint(desktop) {
-//       font-size: var(--font-size-base);
-//     }
-
-//     &[data-selected='true'] {
-//       z-index: var(--z-base);
-//       border-color: var(--color-text-primary);
-//     }
