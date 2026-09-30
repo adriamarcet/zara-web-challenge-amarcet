@@ -35,7 +35,7 @@ a product, browse similar items, and manage a persistent shopping cart.
 
 ### Requirements
 
-- Node.js 20 or newer
+- Node.js 24 (see `.nvmrc`)
 - npm 10 or newer
 - An API key for the challenge API
 
@@ -191,6 +191,13 @@ Cart UI    -> CartProvider -> localStorage
 The challenge is a client-rendered application without server-rendering or
 backend requirements. Vite keeps development and production builds simple,
 while React Router provides explicit catalog, detail, cart, and fallback routes.
+
+### Node version
+
+The brief mentions Node 18, which has been end-of-life since April 2025, and
+current Vitest, jsdom, React Router, and Playwright require Node 20 or newer.
+The project targets Node 24 (LTS) for development and CI. Node is only needed
+to build: the output is static, so the deployment server does not run Node.
 
 ### State management
 
