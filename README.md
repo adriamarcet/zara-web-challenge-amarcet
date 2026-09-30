@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/favicon.svg" alt="MBST logo" width="160" />
+</p>
+
 # Zara Web Challenge
 
 Responsive smartphone catalog built for the Napptilus frontend technical
@@ -375,3 +379,9 @@ npm run preview
 Developed by **Adrià Marcet**, frontend developer. Explore more of my work on
 [GitHub](https://github.com/adriamarcet) or contact me at
 [adriamarcetrovira@gmail.com](mailto:adriamarcetrovira@gmail.com).
+
+<p align="center">
+  <img src="docs/author.webp" alt="Adrià Marcet" width="160" />
+</p>
+
+<p align="center">❤️</p>
