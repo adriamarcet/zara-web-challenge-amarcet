@@ -29,6 +29,7 @@ a product, browse similar items, and manage a persistent shopping cart.
 | State      | React Context and local component state                          |
 | Data       | Native `fetch` API                                               |
 | Tests      | Vitest, jsdom, and React Testing Library                         |
+| E2E        | Playwright                                                       |
 | Quality    | ESLint and Prettier                                              |
 
 ## Getting started
@@ -80,6 +81,12 @@ proxy.
 | `npm run lint`         | Check the code with ESLint              |
 | `npm run format`       | Format the repository with Prettier     |
 | `npm run format:check` | Check formatting without changing files |
+| `npm run test:e2e`     | Run the Playwright end-to-end tests     |
+| `npm run test:e2e:ui`  | Run the Playwright tests in UI mode     |
+
+**Development and production modes:** `npm run dev` serves the assets unminified
+with hot reload, while `npm run build` produces concatenated, minified and
+hashed assets in `dist/` (`npm run preview` serves them locally).
 
 For a complete local verification:
 
@@ -88,6 +95,7 @@ npm run lint
 npm run format:check
 npm test -- --run
 npm run build
+npm run test:e2e
 ```
 
 ## Application routes
@@ -199,6 +207,12 @@ current Vitest, jsdom, React Router, and Playwright require Node 20 or newer.
 The project targets Node 24 (LTS) for development and CI. Node is only needed
 to build: the output is static, so the deployment server does not run Node.
 
+### Interface language
+
+All user-facing text and accessible labels are in English. The brief names some
+actions in Spanish ("Añadir al carrito", "Continuar comprando"), but the Figma
+designs are written in English, so the interface follows the designs.
+
 ### State management
 
 React Context is used only for state shared by multiple components. The cart
@@ -228,6 +242,11 @@ Visual components keep their styled-components definitions in colocated
 breakpoints live under `src/shared/styles` and are loaded by the application
 entry point. The catalog progresses from one column on mobile to three on
 tablet and five once the viewport can support wide product cards.
+
+The font stack is `'Helvetica Neue', Helvetica, Arial, sans-serif`. The brief
+asks for `Helvetica, Arial, sans-serif`; `Helvetica Neue` is added first because
+the Figma designs use it and plain Helvetica renders slightly off on macOS with
+Firefox. Every other system falls back to the requested stack.
 
 ### Product images
 
@@ -300,7 +319,7 @@ API and image fixtures are registered on the browser context so they also
 apply to tabs opened during a test.
 
 ```bash
-npx playwright install chromium firefox
+npx playwright install chromium
 npm run test:e2e
 ```
 
