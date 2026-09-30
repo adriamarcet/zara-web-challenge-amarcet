@@ -109,8 +109,8 @@ outside those features.
 ```text
 src/
 |-- app/
-|   |-- main.jsx                         Browser entry point and providers
-|   |-- App.jsx                          Route composition
+|   |-- main.jsx                         Browser entry point and global provider
+|   |-- App.jsx                          Routes and route-scoped providers
 |   |-- layout/
 |   |   |-- PageLayout.jsx               Shared route layout
 |   |   `-- Header/                      Application header and styles
@@ -143,8 +143,8 @@ them.
 
 ### Folder responsibilities
 
-- `app` is the composition root. It mounts global providers, declares routes,
-  and contains layout that belongs to the whole application.
+- `app` is the composition root. It mounts global and route-scoped providers,
+  declares routes, and contains layout that belongs to the whole application.
 - `features/products` owns product retrieval and the catalog and detail user
   journeys. `catalog` and `detail` contain flow-specific UI, while `components`
   contains product presentation reused by more than one flow.
@@ -167,9 +167,9 @@ model, and cart items reuse the product image component.
 ### Data flow
 
 ```text
-main.jsx -> global providers -> App routes
+main.jsx -> CartProvider -> App routes
 
-Catalog UI -> ProductsProvider -> productsService -> Store API
+Catalog route -> ProductsProvider -> productsService -> Store API
 Detail UI  -> useProductDetail -> productsService -> Store API
 Detail UI  -> CartProvider -> localStorage
 Cart UI    -> CartProvider -> localStorage
@@ -177,8 +177,8 @@ Cart UI    -> CartProvider -> localStorage
 
 - `productsService` owns the API base URL, query parameters, error handling,
   deduplication, and `x-api-key` header.
-- `ProductsProvider` fetches the catalog and exposes loading, error, products,
-  and search state.
+- `ProductsProvider` is mounted only by the catalog route. It fetches the
+  catalog and exposes loading, error, products, and search state.
 - `useProductDetail` manages product loading, errors, and request cancellation.
   `ProductDetail` keeps its selected color and storage local to the screen.
 - `CartProvider` validates stored data, calculates totals, and persists each
@@ -194,10 +194,12 @@ while React Router provides explicit catalog, detail, cart, and fallback routes.
 
 ### State management
 
-React Context is used only for state shared across routes: the catalog and the
-cart. Their contexts, providers, and consumer hooks live in each feature's
-`model` directory. Product configuration remains local to the detail page. This
-avoids an additional state library for a deliberately small state model.
+React Context is used only for state shared by multiple components. The cart
+provider remains application-wide, while the products provider is scoped to
+the catalog route. Their contexts, providers, and consumer hooks live in each
+feature's `model` directory. Product configuration remains local to the detail
+page. This avoids an additional state library for a deliberately small state
+model.
 
 ### Search and request lifecycle
 
