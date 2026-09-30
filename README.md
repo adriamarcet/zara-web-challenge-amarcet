@@ -252,14 +252,46 @@ module inside the corresponding application, feature, or shared directory.
 
 ## End-to-end tests with Playwright
 
-The first e2e test covers catalog navigation, storage and color selection,
-adding the configured phone, and the cart name, variant, image, price, count,
-and total. API and image responses are intercepted for deterministic results;
-the application UI, routing, and cart persistence run normally in Chromium.
-Each test starts with an isolated browser context and an empty cart.
+The suite covers catalog and header navigation, product configuration, cart
+presentation, empty states, item removal, and independent duplicate lines.
+Cart persistence tests add articles through the configurator and verify
+restoration after reload and in a new tab of the same browser context.
+They check names, variants, rendered images, unit prices, counts, and totals
+without seeding localStorage. Removed articles stay absent after reload, and
+removing the last article leaves the cart empty after reload.
+Loading tests hold API responses until the loading state is checked, then
+release them to verify the content appears. Recovery tests cover server and
+network failures, nonexistent products, and unknown routes. Catalog recovery
+uses the logo after the API recovers; product and route failures use their
+return-to-catalog links.
+Mobile tests use a 390 × 844 viewport and touch input to search, configure,
+add, remove, and return to shopping, checking for horizontal overflow.
+Keyboard tests run at desktop and mobile widths and use actual Tab navigation,
+Shift+Tab, typing, Space, arrow keys, and Enter without assigning focus or clicking.
+They also check visible focus indicators on product links and option labels.
+These are browser-based viewport and input simulations, not physical-device
+tests. The shared catalog fixture filters search responses by product name
+and brand.
+API and image responses are intercepted for deterministic results; the real
+application UI, routing, and cart persistence run in a real browser.
+The saved configuration runs Chromium. Firefox was also used to validate the
+suite through a temporary configuration.
+
+Group tests by feature and context with a single `test.describe('Feature: …')`.
+Use short, behavior-focused test titles rather than Given/When/Then titles or
+nested BDD groups. Each test checks one behavior; related assertions can stay
+together when they describe the same outcome.
+
+Prepare shared context with `test.beforeEach()` using real UI actions. Every
+test gets an isolated browser context and its own cart, and must pass when run
+on its own. Keep reusable UI actions and assertions in `e2e/helpers/` and
+controlled API/image fixtures in `e2e/fixtures/`. These conventions apply to
+all existing and future e2e tests.
+API and image fixtures are registered on the browser context so they also
+apply to tabs opened during a test.
 
 ```bash
-npx playwright install chromium
+npx playwright install chromium firefox
 npm run test:e2e
 ```
 
