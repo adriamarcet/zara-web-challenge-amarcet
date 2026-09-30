@@ -84,7 +84,7 @@ describe('ProductDetail cart flow', () => {
     expect(addToCartButton.disabled).toBe(true)
     expect(
       screen.getByRole('link', {
-        name: 'Cesta de la compra, 0 productos',
+        name: 'Shopping cart, 0 items',
       })
     ).toBeTruthy()
 
@@ -96,7 +96,7 @@ describe('ProductDetail cart flow', () => {
 
     await waitFor(() => {
       const cartButton = screen.getByRole('link', {
-        name: 'Cesta de la compra, 1 producto',
+        name: 'Shopping cart, 1 item',
       })
 
       expect(cartButton.textContent).toBe('1')

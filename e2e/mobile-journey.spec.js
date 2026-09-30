@@ -65,7 +65,7 @@ test.describe('Feature: Mobile — product and cart controls', () => {
       page.getByRole('radio', { name: 'Blue', exact: true })
     ).toBeChecked()
     await expectImageColor(
-      page.getByRole('img', { name: 'Journey Phone de Example' }),
+      page.getByRole('img', { name: 'Journey Phone by Example' }),
       'Blue'
     )
     await expect(add).toBeEnabled()
@@ -96,7 +96,7 @@ test.describe('Feature: Mobile — product and cart controls', () => {
   }) => {
     await addPhoneWithTouch(page)
     await page
-      .getByRole('button', { name: 'Eliminar Journey Phone, 256 GB, Blue' })
+      .getByRole('button', { name: 'Remove Journey Phone, 256 GB, Blue' })
       .tap()
     await expect(page.getByRole('heading', { name: 'Cart (0)' })).toBeVisible()
     await expect(cartItems(page)).toHaveCount(0)

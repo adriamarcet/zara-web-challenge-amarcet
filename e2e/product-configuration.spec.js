@@ -78,7 +78,7 @@ test.describe('Feature: Product — changing configuration', () => {
   test('updates the image and color selection without changing capacity or price', async ({
     page,
   }) => {
-    const image = page.getByRole('img', { name: 'Journey Phone de Example' })
+    const image = page.getByRole('img', { name: 'Journey Phone by Example' })
     await expectImageColor(image, 'Black')
     await selectOption(page, 'Blue')
     await expectImageColor(image, 'Blue')

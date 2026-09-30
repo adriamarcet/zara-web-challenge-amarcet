@@ -59,7 +59,7 @@ describe('CartPage navigation', () => {
     })
 
     const cartLink = screen.getByRole('link', {
-      name: 'Cesta de la compra, 1 producto',
+      name: 'Shopping cart, 1 item',
     })
 
     expect(cartLink.getAttribute('href')).toBe('/cart')
@@ -68,9 +68,7 @@ describe('CartPage navigation', () => {
     expect(
       screen.getByRole('heading', { level: 1, name: 'Cart (1)' })
     ).toBeTruthy()
-    expect(
-      screen.queryByRole('link', { name: /Cesta de la compra/ })
-    ).toBeNull()
+    expect(screen.queryByRole('link', { name: /Shopping cart/ })).toBeNull()
 
     const continueShoppingLink = screen.getByRole('link', {
       name: 'Continue shopping',
@@ -82,7 +80,7 @@ describe('CartPage navigation', () => {
     expect(screen.getByText('Product list')).toBeTruthy()
     expect(
       screen.getByRole('link', {
-        name: 'Cesta de la compra, 1 producto',
+        name: 'Shopping cart, 1 item',
       })
     ).toBeTruthy()
   })
@@ -95,9 +93,7 @@ describe('CartPage navigation', () => {
     ).toBeTruthy()
     expect(screen.getByRole('link', { name: 'MBST Shop' })).toBeTruthy()
     expect(screen.getByRole('link', { name: 'Continue shopping' })).toBeTruthy()
-    expect(
-      screen.queryByRole('link', { name: /Cesta de la compra/ })
-    ).toBeNull()
+    expect(screen.queryByRole('link', { name: /Shopping cart/ })).toBeNull()
     expect(screen.queryByRole('button', { name: 'Pay' })).toBeNull()
     expect(screen.queryByText('Total')).toBeNull()
   })

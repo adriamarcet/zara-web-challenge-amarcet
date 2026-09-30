@@ -14,7 +14,7 @@ const Header = function () {
   const { itemCount } = useCart()
   const { pathname } = useLocation()
   const cartHasItems = itemCount > 0
-  const cartLabel = `Cesta de la compra, ${itemCount} ${itemCount === 1 ? 'producto' : 'productos'}`
+  const cartLabel = `Shopping cart, ${itemCount} ${itemCount === 1 ? 'item' : 'items'}`
   const isCartPage = pathname === '/cart'
 
   return (

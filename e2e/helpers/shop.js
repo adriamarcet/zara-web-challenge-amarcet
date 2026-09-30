@@ -48,7 +48,7 @@ export async function configureAndAddPhone(
 
 export function cartLink(page, count) {
   return page.getByRole('link', {
-    name: `Cesta de la compra, ${count} ${count === 1 ? 'producto' : 'productos'}`,
+    name: `Shopping cart, ${count} ${count === 1 ? 'item' : 'items'}`,
     exact: true,
   })
 }

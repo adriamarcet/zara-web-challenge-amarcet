@@ -21,7 +21,7 @@ test.describe('Feature: Cart — removing one of several articles', () => {
     page,
   }) => {
     await page
-      .getByRole('button', { name: 'Eliminar Journey Phone, 256 GB, Blue' })
+      .getByRole('button', { name: 'Remove Journey Phone, 256 GB, Blue' })
       .click()
     await expect(cartItems(page)).toHaveCount(2)
     await expect(cartVariant(page, '256 GB | Blue')).toHaveCount(0)
@@ -45,7 +45,7 @@ test.describe('Feature: Cart — removing one of several articles', () => {
   }) => {
     await expectCartSummary(page, 3, 2047)
     await page
-      .getByRole('button', { name: 'Eliminar Journey Phone, 256 GB, Blue' })
+      .getByRole('button', { name: 'Remove Journey Phone, 256 GB, Blue' })
       .click()
     await expectCartSummary(page, 2, 1198)
     await page.getByRole('link', { name: 'Continue shopping' }).click()
@@ -63,7 +63,7 @@ test.describe('Feature: Cart — removing the last article', () => {
     page,
   }) => {
     await page
-      .getByRole('button', { name: 'Eliminar Journey Phone, 128 GB, Black' })
+      .getByRole('button', { name: 'Remove Journey Phone, 128 GB, Black' })
       .click()
     await expect(page.getByRole('heading', { name: 'Cart (0)' })).toBeVisible()
     await expect(page.getByRole('list', { name: 'Cart items' })).toHaveCount(0)
@@ -80,7 +80,7 @@ test.describe('Feature: Cart — removing the last article', () => {
 
   test('returns to the catalog with a zero header count', async ({ page }) => {
     await page
-      .getByRole('button', { name: 'Eliminar Journey Phone, 128 GB, Black' })
+      .getByRole('button', { name: 'Remove Journey Phone, 128 GB, Black' })
       .click()
     await page.getByRole('link', { name: 'Continue shopping' }).click()
     await expect(page).toHaveURL('/')
@@ -91,7 +91,7 @@ test.describe('Feature: Cart — removing the last article', () => {
     page,
   }) => {
     await page
-      .getByRole('button', { name: 'Eliminar Journey Phone, 128 GB, Black' })
+      .getByRole('button', { name: 'Remove Journey Phone, 128 GB, Black' })
       .click()
     await page.getByRole('link', { name: 'Continue shopping' }).click()
     await page.getByRole('link', { name: /Explorer Phone by Example/ }).click()

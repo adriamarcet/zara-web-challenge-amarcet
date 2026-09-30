@@ -109,7 +109,7 @@ test.describe('Feature: Cart — persisted articles', () => {
     page,
   }) => {
     const remove = page.getByRole('button', {
-      name: 'Eliminar Journey Phone, 256 GB, Blue',
+      name: 'Remove Journey Phone, 256 GB, Blue',
       exact: true,
     })
     await remove.click()
@@ -137,7 +137,7 @@ test.describe('Feature: Cart — persisted empty state', () => {
   }) => {
     await page
       .getByRole('button', {
-        name: 'Eliminar Journey Phone, 128 GB, Black',
+        name: 'Remove Journey Phone, 128 GB, Black',
         exact: true,
       })
       .click()

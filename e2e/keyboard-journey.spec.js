@@ -76,7 +76,7 @@ for (const screen of [
         page.getByText('From 849 EUR', { exact: true })
       ).toBeVisible()
       await expectImageColor(
-        page.getByRole('img', { name: 'Journey Phone de Example' }),
+        page.getByRole('img', { name: 'Journey Phone by Example' }),
         'Blue'
       )
       await expect(
@@ -109,7 +109,7 @@ for (const screen of [
       await activateWithKeyboard(
         page,
         page.getByRole('button', {
-          name: 'Eliminar Journey Phone, 256 GB, Blue',
+          name: 'Remove Journey Phone, 256 GB, Blue',
         })
       )
       await expect(cartItems(page)).toHaveCount(0)
