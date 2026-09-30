@@ -30,7 +30,7 @@ const ProductConfigurator = ({
           {image && (
             <ProductConfiguratorImage
               src={image}
-              alt={`${product.name} de ${product.brand}`}
+              alt={`${product.name} by ${product.brand}`}
               width="1080"
               height="1080"
               loading="eager"

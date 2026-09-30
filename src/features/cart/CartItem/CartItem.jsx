@@ -27,10 +27,10 @@ function CartItem({ item, onRemove }) {
         <CartItemPrice>{formatPrice(item.price)} EUR</CartItemPrice>
         <CartItemRemove
           type="button"
-          aria-label={`Eliminar ${item.name}, ${item.capacity}, ${item.colorName}`}
+          aria-label={`Remove ${item.name}, ${item.capacity}, ${item.colorName}`}
           onClick={() => onRemove(item.lineId)}
         >
-          Eliminar
+          Remove
         </CartItemRemove>
       </CartItemInfo>
     </CartItemElement>

@@ -129,7 +129,7 @@ describe('CartPage navigation', () => {
 
     fireEvent.click(
       screen.getByRole('button', {
-        name: 'Eliminar Galaxy S24 Ultra, 512 GB, Titanium Violet',
+        name: 'Remove Galaxy S24 Ultra, 512 GB, Titanium Violet',
       })
     )
 

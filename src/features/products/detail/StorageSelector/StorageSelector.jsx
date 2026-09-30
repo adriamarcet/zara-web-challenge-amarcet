@@ -13,7 +13,7 @@ const StorageSelector = ({
     <>
       <fieldset className="margin-block-end-xl">
         <legend className="font-s font-weight-light text-uppercase margin-block-end-l">
-          Storage ¿How much space do you need?
+          Storage: how much space do you need?
         </legend>
         <StorageSelectorLabelWrapper>
           {storageOptions?.map((option) => (
