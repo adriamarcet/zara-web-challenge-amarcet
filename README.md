@@ -170,8 +170,9 @@ cards.
 
 Remote image URLs are normalized to HTTPS. Once an image loads, background
 processing uses Canvas during browser idle time to remove white pixels connected
-to the image edges and encode a centered WebP result. Optimized URLs are cached
-in memory and failures fall back to the original image.
+to the image edges and encode a centered WebP result. Canvas dimensions follow
+the rendered image size, generated object URLs are revoked with their component
+lifecycle, and failures fall back to the original image.
 
 ### JavaScript scope
 

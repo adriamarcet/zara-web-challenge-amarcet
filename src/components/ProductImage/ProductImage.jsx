@@ -1,24 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { optimizeProductImage } from './optimizeProductImage'
-
-function getRemoteSource(source) {
-  if (!source) return source
-
-  try {
-    const url = new URL(source)
-
-    if (
-      url.protocol === 'http:' &&
-      url.hostname === 'prueba-tecnica-api-tienda-moviles.onrender.com'
-    ) {
-      url.protocol = 'https:'
-    }
-
-    return url.toString()
-  } catch {
-    return source
-  }
-}
+import {
+  optimizeProductImage,
+  revokeOptimizedImage,
+} from './optimizeProductImage'
+import { getRemoteSource } from './productImageUtils'
 
 function ProductImage({
   src,
@@ -33,10 +18,17 @@ function ProductImage({
   const remoteSource = getRemoteSource(src)
   const [displaySource, setDisplaySource] = useState(remoteSource)
   const currentSource = useRef(remoteSource)
+  const optimizedSource = useRef(null)
 
   useEffect(() => {
     currentSource.current = remoteSource
     setDisplaySource(remoteSource)
+
+    return () => {
+      currentSource.current = null
+      revokeOptimizedImage(optimizedSource.current)
+      optimizedSource.current = null
+    }
   }, [remoteSource])
 
   function handleLoad(event) {
@@ -48,15 +40,19 @@ function ProductImage({
     }
 
     optimizeProductImage(remoteSource, event.currentTarget).then(
-      (optimizedSource) => {
-        if (currentSource.current === remoteSource) {
-          if (optimizedSource === remoteSource) {
-            onReady?.()
-            return
-          }
-
-          setDisplaySource(optimizedSource)
+      (nextOptimizedSource) => {
+        if (currentSource.current !== remoteSource) {
+          revokeOptimizedImage(nextOptimizedSource)
+          return
         }
+
+        if (nextOptimizedSource === remoteSource) {
+          onReady?.()
+          return
+        }
+
+        optimizedSource.current = nextOptimizedSource
+        setDisplaySource(nextOptimizedSource)
       }
     )
   }
@@ -76,5 +72,4 @@ function ProductImage({
   )
 }
 
-export { getRemoteSource }
 export default ProductImage

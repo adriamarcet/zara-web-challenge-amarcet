@@ -20,11 +20,7 @@ function CartPage() {
         <>
           <CartItemsList aria-label="Cart items">
             {items.map((item) => (
-              <CartItem
-                key={item.lineId}
-                item={item}
-                onRemove={removeItem}
-              />
+              <CartItem key={item.lineId} item={item} onRemove={removeItem} />
             ))}
           </CartItemsList>
           <CartSummary total={cartTotal} />

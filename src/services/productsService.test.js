@@ -41,7 +41,7 @@ describe('productsService.getAll', () => {
     vi.stubGlobal('fetch', fetchMock)
 
     await expect(productsService.getAll()).rejects.toThrow(
-      'Failed to fetch products',
+      'Failed to fetch products'
     )
   })
 })

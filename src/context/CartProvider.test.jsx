@@ -67,7 +67,9 @@ describe('CartProvider', () => {
     })
 
     expect(result.current.items).toHaveLength(3)
-    expect(new Set(result.current.items.map((item) => item.lineId)).size).toBe(3)
+    expect(new Set(result.current.items.map((item) => item.lineId)).size).toBe(
+      3
+    )
     expect(result.current.items.every((item) => item.quantity === 1)).toBe(true)
     expect(result.current.items[0].colorName).toBe('Titanium Gray')
     expect(result.current.items[1].colorName).toBe('Titanium Gray')
@@ -136,7 +138,9 @@ describe('CartProvider', () => {
     const { result } = renderHook(() => useCart(), { wrapper })
 
     expect(result.current.items).toHaveLength(2)
-    expect(new Set(result.current.items.map((item) => item.lineId)).size).toBe(2)
+    expect(new Set(result.current.items.map((item) => item.lineId)).size).toBe(
+      2
+    )
     expect(result.current.items.every((item) => item.quantity === 1)).toBe(true)
     expect(result.current.itemCount).toBe(2)
     expect(result.current.cartTotal).toBe(2198)

@@ -32,7 +32,7 @@ const getById = async (id, { signal } = {}) => {
     },
     signal,
   }
-  
+
   const response = await fetch(`${baseUrl}/products/${id}`, options)
 
   if (response.status === 404) {

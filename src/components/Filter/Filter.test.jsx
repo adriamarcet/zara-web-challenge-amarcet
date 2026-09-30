@@ -18,7 +18,7 @@ describe('Filter', () => {
         value={{ products: [], loading: false, setQuery: vi.fn() }}
       >
         <Filter />
-      </ProductsContext.Provider>,
+      </ProductsContext.Provider>
     )
 
     const input = screen.getByRole('searchbox', {
@@ -37,7 +37,7 @@ describe('Filter', () => {
         value={{ products: [], loading: false, setQuery }}
       >
         <Filter />
-      </ProductsContext.Provider>,
+      </ProductsContext.Provider>
     )
 
     const input = screen.getByRole('searchbox', {
@@ -63,7 +63,7 @@ describe('Filter', () => {
         value={{ products: [], loading: false, setQuery: vi.fn() }}
       >
         <Filter />
-      </ProductsContext.Provider>,
+      </ProductsContext.Provider>
     )
 
     expect(screen.getByRole('status').textContent).toBe('0 results')

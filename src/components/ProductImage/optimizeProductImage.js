@@ -1,6 +1,33 @@
-const OUTPUT_SIZE = 1080
+const MAX_OUTPUT_SIZE = 1080
+const FALLBACK_OUTPUT_SIZE = 512
+const MAX_PIXEL_RATIO = 2
 const WHITE_THRESHOLD = 238
-const optimizedImages = new Map()
+
+function getDeclaredDimension(image, attribute) {
+  const value = Number.parseFloat(image.getAttribute?.(attribute))
+
+  return Number.isFinite(value) && value > 0 ? value : 0
+}
+
+function getOptimizationSize(
+  image,
+  pixelRatio = globalThis.devicePixelRatio || 1
+) {
+  const renderedSize = Math.max(image.clientWidth || 0, image.clientHeight || 0)
+  const declaredSize = Math.max(
+    getDeclaredDimension(image, 'width'),
+    getDeclaredDimension(image, 'height')
+  )
+  const cssSize = renderedSize || declaredSize || FALLBACK_OUTPUT_SIZE
+  const safePixelRatio = Number.isFinite(pixelRatio)
+    ? Math.min(Math.max(pixelRatio, 1), MAX_PIXEL_RATIO)
+    : 1
+
+  return Math.min(
+    MAX_OUTPUT_SIZE,
+    Math.max(1, Math.ceil(cssSize * safePixelRatio))
+  )
+}
 
 function isOpaqueWhite(data, pixelIndex) {
   const offset = pixelIndex * 4
@@ -93,7 +120,11 @@ async function createOptimizedImage(image) {
 
   if (!sourceWidth || !sourceHeight) return image.currentSrc || image.src
 
-  const scale = Math.min(OUTPUT_SIZE / sourceWidth, OUTPUT_SIZE / sourceHeight)
+  const outputSize = Math.min(
+    getOptimizationSize(image),
+    Math.max(sourceWidth, sourceHeight)
+  )
+  const scale = Math.min(outputSize / sourceWidth, outputSize / sourceHeight)
   const renderedWidth = Math.max(1, Math.round(sourceWidth * scale))
   const renderedHeight = Math.max(1, Math.round(sourceHeight * scale))
   const sourceCanvas = document.createElement('canvas')
@@ -121,12 +152,12 @@ async function createOptimizedImage(image) {
 
   if (!outputContext) return image.currentSrc || image.src
 
-  outputCanvas.width = OUTPUT_SIZE
-  outputCanvas.height = OUTPUT_SIZE
+  outputCanvas.width = outputSize
+  outputCanvas.height = outputSize
   outputContext.drawImage(
     sourceCanvas,
-    Math.round((OUTPUT_SIZE - renderedWidth) / 2),
-    Math.round((OUTPUT_SIZE - renderedHeight) / 2)
+    Math.round((outputSize - renderedWidth) / 2),
+    Math.round((outputSize - renderedHeight) / 2)
   )
 
   const blob = await canvasToBlob(outputCanvas)
@@ -134,14 +165,18 @@ async function createOptimizedImage(image) {
 }
 
 function optimizeProductImage(source, image) {
-  if (!optimizedImages.has(source)) {
-    optimizedImages.set(
-      source,
-      createOptimizedImage(image).catch(() => source)
-    )
-  }
-
-  return optimizedImages.get(source)
+  return createOptimizedImage(image).catch(() => source)
 }
 
-export { optimizeProductImage, removeConnectedWhiteBackground }
+function revokeOptimizedImage(source) {
+  if (typeof source === 'string' && source.startsWith('blob:')) {
+    URL.revokeObjectURL(source)
+  }
+}
+
+export {
+  getOptimizationSize,
+  optimizeProductImage,
+  removeConnectedWhiteBackground,
+  revokeOptimizedImage,
+}

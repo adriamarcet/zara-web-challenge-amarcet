@@ -8,11 +8,16 @@ import {
   waitFor,
 } from '@testing-library/react'
 import { afterEach, describe, expect, test, vi } from 'vitest'
-import ProductImage, { getRemoteSource } from './ProductImage'
-import { optimizeProductImage } from './optimizeProductImage'
+import ProductImage from './ProductImage'
+import {
+  optimizeProductImage,
+  revokeOptimizedImage,
+} from './optimizeProductImage'
+import { getRemoteSource } from './productImageUtils'
 
 vi.mock('./optimizeProductImage', () => ({
   optimizeProductImage: vi.fn(),
+  revokeOptimizedImage: vi.fn(),
 }))
 
 describe('ProductImage', () => {
@@ -66,6 +71,44 @@ describe('ProductImage', () => {
     fireEvent.load(image)
 
     expect(onReady).toHaveBeenCalledTimes(1)
+  })
+
+  test('revokes the optimized image when it unmounts', async () => {
+    const source = 'https://example.com/images/phone.webp'
+    optimizeProductImage.mockResolvedValue('blob:optimized-phone')
+    const { unmount } = render(<ProductImage src={source} alt="Phone" />)
+
+    const image = screen.getByRole('img', { name: 'Phone' })
+    fireEvent.load(image)
+
+    await waitFor(() => {
+      expect(image.getAttribute('src')).toBe('blob:optimized-phone')
+    })
+
+    unmount()
+
+    expect(revokeOptimizedImage).toHaveBeenCalledWith('blob:optimized-phone')
+  })
+
+  test('revokes an optimization that finishes after unmounting', async () => {
+    let finishOptimization
+    const pendingOptimization = new Promise((resolve) => {
+      finishOptimization = resolve
+    })
+    optimizeProductImage.mockReturnValue(pendingOptimization)
+    const { unmount } = render(
+      <ProductImage src="https://example.com/images/phone.webp" alt="Phone" />
+    )
+
+    fireEvent.load(screen.getByRole('img', { name: 'Phone' }))
+    unmount()
+    finishOptimization('blob:late-optimized-phone')
+
+    await waitFor(() => {
+      expect(revokeOptimizedImage).toHaveBeenCalledWith(
+        'blob:late-optimized-phone'
+      )
+    })
   })
 
   test('allows eager loading for a primary image', () => {

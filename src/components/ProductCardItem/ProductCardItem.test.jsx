@@ -15,6 +15,7 @@ import ProductCardItem from './ProductCardItem'
 
 vi.mock('../ProductImage/optimizeProductImage', () => ({
   optimizeProductImage: vi.fn(),
+  revokeOptimizedImage: vi.fn(),
 }))
 
 describe('ProductCardItem', () => {

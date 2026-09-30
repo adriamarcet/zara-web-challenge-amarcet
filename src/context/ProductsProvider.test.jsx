@@ -67,7 +67,7 @@ describe('ProductsProvider', () => {
     await waitFor(() => {
       expect(productsService.getAll).toHaveBeenCalledTimes(2)
       expect(productsService.getAll).toHaveBeenLastCalledWith(
-        expect.objectContaining({ search: 'samsung' }),
+        expect.objectContaining({ search: 'samsung' })
       )
     })
   })

@@ -2,9 +2,9 @@ const formatPrice = (price) => {
   const formattedPrice = new Intl.NumberFormat('en-US', {
     maximumFractionDigits: 0,
     useGrouping: false,
-  }).format(price);
+  }).format(price)
 
-  return formattedPrice;
+  return formattedPrice
 }
 
-export default formatPrice;
+export default formatPrice
