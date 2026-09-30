@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useCart } from '../../cart/model/useCart'
-import productsService from '../api/productsService'
+import { useProductDetail } from '../model/useProductDetail'
 import BackToCatalogLink from './BackToCatalogLink/BackToCatalogLink'
 import ProductConfigurator from './ProductConfigurator/ProductConfigurator'
 import ProductSpecs from './ProductSpecs/ProductSpecs'
@@ -10,41 +10,13 @@ import SimilarProducts from './SimilarProducts/SimilarProducts'
 function ProductDetail() {
   const { productId } = useParams()
   const { addItem } = useCart()
-  const [product, setProduct] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
+  const { product, loading, error } = useProductDetail(productId)
   const [selectedCapacity, setSelectedCapacity] = useState(null)
   const [selectedColorName, setSelectedColorName] = useState(null)
 
   useEffect(() => {
-    const controller = new AbortController()
-
-    async function loadProduct() {
-      setLoading(true)
-      setError(false)
-      setProduct(null)
-      setSelectedCapacity(null)
-      setSelectedColorName(null)
-
-      try {
-        const result = await productsService.getById(productId, {
-          signal: controller.signal,
-        })
-        setProduct(result)
-      } catch {
-        if (!controller.signal.aborted) {
-          setError(true)
-        }
-      } finally {
-        if (!controller.signal.aborted) {
-          setLoading(false)
-        }
-      }
-    }
-
-    loadProduct()
-
-    return () => controller.abort()
+    setSelectedCapacity(null)
+    setSelectedColorName(null)
   }, [productId])
 
   if (loading) {

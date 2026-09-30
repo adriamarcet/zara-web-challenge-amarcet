@@ -1,3 +1,5 @@
+// Hook to share products context specifically, does not work outside ProductsProvider limits
+
 import { useContext } from 'react'
 import { ProductsContext } from './ProductsContext'
 

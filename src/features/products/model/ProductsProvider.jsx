@@ -1,3 +1,5 @@
+// Contains state(s) and provides it. Admin load, queries, aborted queries and error.
+
 import { useState, useEffect } from 'react'
 import { ProductsContext } from './ProductsContext'
 import productsService from '../api/productsService'

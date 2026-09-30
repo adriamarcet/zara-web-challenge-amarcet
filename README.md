@@ -170,7 +170,7 @@ model, and cart items reuse the product image component.
 main.jsx -> global providers -> App routes
 
 Catalog UI -> ProductsProvider -> productsService -> Store API
-Detail UI  -> productsService --------------------> Store API
+Detail UI  -> useProductDetail -> productsService -> Store API
 Detail UI  -> CartProvider -> localStorage
 Cart UI    -> CartProvider -> localStorage
 ```
@@ -179,8 +179,8 @@ Cart UI    -> CartProvider -> localStorage
   deduplication, and `x-api-key` header.
 - `ProductsProvider` fetches the catalog and exposes loading, error, products,
   and search state.
-- `ProductDetail` loads a single product and keeps its selected color and
-  storage local to the screen.
+- `useProductDetail` manages product loading, errors, and request cancellation.
+  `ProductDetail` keeps its selected color and storage local to the screen.
 - `CartProvider` validates stored data, calculates totals, and persists each
   configured product as an independent line.
 
