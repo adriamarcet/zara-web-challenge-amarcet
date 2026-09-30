@@ -4,6 +4,8 @@ Responsive smartphone catalog built for the Napptilus frontend technical
 challenge. The application lets users search the catalog, inspect and configure
 a product, browse similar items, and manage a persistent shopping cart.
 
+**Live demo:** <https://amarcet-napptilus-challenge.netlify.app/>
+
 ## Features
 
 - Product catalog limited to 20 results, with server-side search and a result
@@ -193,6 +195,10 @@ Cart UI    -> CartProvider -> localStorage
   configured product as an independent line.
 
 ## Technical decisions
+
+The decisions below are the summary. A chronological log of choices and doubts
+made while building the challenge (written in Spanish) is kept in
+[decisiones.md](decisiones.md).
 
 ### Vite and client-side routing
 
