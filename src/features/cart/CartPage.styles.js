@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { MEDIA_QUERIES } from '../../styles/breakpoints'
+import { MEDIA_QUERIES } from '../../shared/styles/breakpoints'
 
 const HEADER_HEIGHT = 80
 

@@ -22,7 +22,7 @@ const ProductCardInfo = styled.div`
   z-index: 1;
 `
 
-const ProductCardItemElement = styled.li`
+const ProductCardElement = styled.li`
   list-style: none;
   position: relative;
 
@@ -52,7 +52,7 @@ const ProductCardItemElement = styled.li`
   }
 `
 
-const ProductCardItemLink = styled(Link)`
+const ProductCardLink = styled(Link)`
   color: inherit;
   display: flex;
   flex-direction: column;
@@ -159,11 +159,11 @@ const ProductCardSummary = styled.div`
 `
 
 export {
-  ProductCardItemElement,
-  ProductCardItemLink,
+  ProductCardElement,
   ProductCardImage,
   ProductCardImageSkeleton,
   ProductCardImageWrapper,
   ProductCardInfo,
+  ProductCardLink,
   ProductCardSummary,
 }

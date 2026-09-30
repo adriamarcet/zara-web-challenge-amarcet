@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useProducts } from '../../context/useProducts'
+import { useProducts } from '../../model/useProducts'
 import {
-  FilterComponent,
-  FilterInputWrap,
-  FilterInput,
-  FilterClearButton,
-} from './Filter.styles'
-const Filter = function () {
+  ProductSearchClearButton,
+  ProductSearchContainer,
+  ProductSearchInput,
+  ProductSearchInputWrapper,
+} from './ProductSearch.styles'
+
+function ProductSearch() {
   const { products, loading, setQuery } = useProducts()
   const [inputValue, setInputValue] = useState('')
   const [showLoading, setShowLoading] = useState('')
@@ -29,37 +30,37 @@ const Filter = function () {
     return () => clearTimeout(delayId)
   }, [loading])
 
-  const handleFilterInput = (e) => {
+  const handleSearchInput = (e) => {
     setInputValue(e.target.value)
   }
 
   return (
-    <FilterComponent className="container">
+    <ProductSearchContainer className="container">
       <form onSubmit={(e) => e.preventDefault()} role="search">
-        <FilterInputWrap>
+        <ProductSearchInputWrapper>
           <label htmlFor="filterInput" className="sr-only">
             Search for a smartphone
           </label>
-          <FilterInput
+          <ProductSearchInput
             aria-describedby="results-count"
             autoComplete="off"
             id="filterInput"
             name="filterInput"
-            onChange={handleFilterInput}
+            onChange={handleSearchInput}
             placeholder="Search for a smartphone"
             type="search"
             value={inputValue}
           />
           {inputValue.trim() && (
-            <FilterClearButton
+            <ProductSearchClearButton
               type="button"
               aria-label="Clear search"
               onClick={() => setInputValue('')}
             >
               <span aria-hidden="true">×</span>
-            </FilterClearButton>
+            </ProductSearchClearButton>
           )}
-        </FilterInputWrap>
+        </ProductSearchInputWrapper>
       </form>
       <p
         id="results-count"
@@ -69,8 +70,8 @@ const Filter = function () {
       >
         {showLoading ? 'Searching...' : `${products.length} results`}
       </p>
-    </FilterComponent>
+    </ProductSearchContainer>
   )
 }
 
-export default Filter
+export default ProductSearch

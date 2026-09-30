@@ -3,11 +3,11 @@
 import { act, cleanup, renderHook, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, test, vi } from 'vitest'
 
-import productsService from '../services/productsService'
+import productsService from '../api/productsService'
 import { ProductsProvider } from './ProductsProvider'
 import { useProducts } from './useProducts'
 
-vi.mock('../services/productsService', () => ({
+vi.mock('../api/productsService', () => ({
   default: {
     getAll: vi.fn(),
   },

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { ProductsContext } from './ProductsContext'
-import productsService from '../services/productsService'
+import productsService from '../api/productsService'
 
 export function ProductsProvider({ children }) {
   const [products, setProducts] = useState([])

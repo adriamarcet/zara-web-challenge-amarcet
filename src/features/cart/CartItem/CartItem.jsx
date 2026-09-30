@@ -1,4 +1,4 @@
-import formatPrice from '../../../utils/formatPrice'
+import formatPrice from '../../../shared/lib/formatPrice'
 import {
   CartItemElement,
   CartItemImage,

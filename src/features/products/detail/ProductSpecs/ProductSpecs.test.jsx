@@ -3,7 +3,7 @@
 import { cleanup, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, test } from 'vitest'
 
-import ProductDetailSpecs from './ProductDetailSpecs'
+import ProductSpecs from './ProductSpecs'
 
 const product = {
   brand: 'Samsung',
@@ -22,9 +22,9 @@ const product = {
 
 afterEach(cleanup)
 
-describe('ProductDetailSpecs', () => {
+describe('ProductSpecs', () => {
   test('renders every available product specification', () => {
-    render(<ProductDetailSpecs product={product} />)
+    render(<ProductSpecs product={product} />)
 
     expect(
       screen.getByRole('heading', { level: 2, name: 'Specifications' })
@@ -51,7 +51,7 @@ describe('ProductDetailSpecs', () => {
 
   test('omits specifications whose value is missing', () => {
     render(
-      <ProductDetailSpecs
+      <ProductSpecs
         product={{
           ...product,
           specs: {

@@ -10,14 +10,14 @@ import {
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { afterEach, describe, expect, test, vi } from 'vitest'
 
-import cartActive from '../../assets/cartActive.svg'
-import { CartProvider } from '../../context/CartProvider'
-import { useCart } from '../../context/useCart'
-import productsService from '../../services/productsService'
-import Header from '../Header'
+import Header from '../../../app/layout/Header/Header'
+import cartActive from '../../../shared/assets/cartActive.svg'
+import { CartProvider } from '../../cart/model/CartProvider'
+import { useCart } from '../../cart/model/useCart'
+import productsService from '../api/productsService'
 import ProductDetail from './ProductDetail'
 
-vi.mock('../../services/productsService', () => ({
+vi.mock('../api/productsService', () => ({
   default: {
     getById: vi.fn(),
   },

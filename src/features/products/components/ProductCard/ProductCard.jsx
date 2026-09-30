@@ -1,16 +1,16 @@
 import { useState } from 'react'
-import formatPrice from '../../utils/formatPrice'
+import formatPrice from '../../../../shared/lib/formatPrice'
 import {
-  ProductCardItemElement,
-  ProductCardItemLink,
+  ProductCardElement,
   ProductCardImage,
   ProductCardImageSkeleton,
   ProductCardImageWrapper,
   ProductCardInfo,
+  ProductCardLink,
   ProductCardSummary,
-} from './ProductCardItem.styles'
+} from './ProductCard.styles'
 
-function ProductCardItem({
+function ProductCard({
   product,
   imageLoading = 'lazy',
   imageFetchPriority = 'auto',
@@ -19,8 +19,8 @@ function ProductCardItem({
   const imageLoaded = loadedImageUrl === product.imageUrl
 
   return (
-    <ProductCardItemElement>
-      <ProductCardItemLink to={`/products/${product.id}`}>
+    <ProductCardElement>
+      <ProductCardLink to={`/products/${product.id}`}>
         <ProductCardImageWrapper>
           <ProductCardImageSkeleton
             data-testid="product-image-skeleton"
@@ -47,9 +47,9 @@ function ProductCardItem({
             </p>
           </ProductCardSummary>
         </ProductCardInfo>
-      </ProductCardItemLink>
-    </ProductCardItemElement>
+      </ProductCardLink>
+    </ProductCardElement>
   )
 }
 
-export default ProductCardItem
+export default ProductCard

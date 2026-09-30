@@ -1,18 +1,18 @@
-import formatPrice from '../../../utils/formatPrice'
+import formatPrice from '../../../../shared/lib/formatPrice'
 import {
-  ProductDetailFeaturedAction,
-  ProductDetailFeaturedWrapper,
-  ProductDetailFeaturedElement,
-  ProductDetailFeaturedMedia,
-  ProductDetailFeaturedImage,
-  ProductDetailFeaturedInfo,
-  ProductDetailFeaturedPrice,
-  ProductDetailFeaturedTitle,
-} from './ProductDetailFeatured.styles'
+  ProductConfiguratorAction,
+  ProductConfiguratorElement,
+  ProductConfiguratorImage,
+  ProductConfiguratorInfo,
+  ProductConfiguratorMedia,
+  ProductConfiguratorPrice,
+  ProductConfiguratorTitle,
+  ProductConfiguratorWrapper,
+} from './ProductConfigurator.styles'
 import ColorSelector from '../ColorSelector/ColorSelector'
 import StorageSelector from '../StorageSelector/StorageSelector'
 
-const ProductDetailFeatured = ({
+const ProductConfigurator = ({
   product,
   image,
   selectedCapacity,
@@ -24,11 +24,11 @@ const ProductDetailFeatured = ({
   onAddToCart,
 }) => {
   return (
-    <ProductDetailFeaturedWrapper>
-      <ProductDetailFeaturedElement>
-        <ProductDetailFeaturedMedia>
+    <ProductConfiguratorWrapper>
+      <ProductConfiguratorElement>
+        <ProductConfiguratorMedia>
           {image && (
-            <ProductDetailFeaturedImage
+            <ProductConfiguratorImage
               src={image}
               alt={`${product.name} de ${product.brand}`}
               width="1080"
@@ -37,19 +37,19 @@ const ProductDetailFeatured = ({
               fetchPriority="high"
             />
           )}
-        </ProductDetailFeaturedMedia>
-        <ProductDetailFeaturedInfo>
+        </ProductConfiguratorMedia>
+        <ProductConfiguratorInfo>
           <div>
-            <ProductDetailFeaturedTitle className="font-l text-uppercase font-weight-light margin-block-end-xs">
+            <ProductConfiguratorTitle className="font-l text-uppercase font-weight-light margin-block-end-xs">
               {product.name}
-            </ProductDetailFeaturedTitle>
-            <ProductDetailFeaturedPrice
+            </ProductConfiguratorTitle>
+            <ProductConfiguratorPrice
               className="font-s font-weight-light"
               aria-live="polite"
               aria-atomic="true"
             >
               From {formatPrice(displayedPrice)} EUR
-            </ProductDetailFeaturedPrice>
+            </ProductConfiguratorPrice>
           </div>
           <div>
             <StorageSelector
@@ -63,7 +63,7 @@ const ProductDetailFeatured = ({
               onColorChange={onColorChange}
             />
           </div>
-          <ProductDetailFeaturedAction>
+          <ProductConfiguratorAction>
             <button
               type="button"
               className="button button--primary button--full"
@@ -72,11 +72,11 @@ const ProductDetailFeatured = ({
             >
               Add to cart
             </button>
-          </ProductDetailFeaturedAction>
-        </ProductDetailFeaturedInfo>
-      </ProductDetailFeaturedElement>
-    </ProductDetailFeaturedWrapper>
+          </ProductConfiguratorAction>
+        </ProductConfiguratorInfo>
+      </ProductConfiguratorElement>
+    </ProductConfiguratorWrapper>
   )
 }
 
-export default ProductDetailFeatured
+export default ProductConfigurator

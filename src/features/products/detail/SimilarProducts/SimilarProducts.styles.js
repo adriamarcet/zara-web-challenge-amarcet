@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components'
-import { MEDIA_QUERIES } from '../../../styles/breakpoints'
+import { MEDIA_QUERIES } from '../../../../shared/styles/breakpoints'
 
 const moveScrollbarThumb = keyframes`
   from {
@@ -11,7 +11,7 @@ const moveScrollbarThumb = keyframes`
   }
 `
 
-const SimilarItemsSection = styled.section`
+const SimilarProductsSection = styled.section`
   min-width: 0;
   padding-block: var(--size-2xl);
 
@@ -31,7 +31,7 @@ const SimilarItemsSection = styled.section`
   }
 `
 
-const SimilarItemsScroller = styled.div`
+const SimilarProductsScroller = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-inline: contain;
@@ -65,7 +65,7 @@ const SimilarItemsScroller = styled.div`
   }
 `
 
-const SimilarItemsTrack = styled.ul`
+const SimilarProductsTrack = styled.ul`
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: min(85vw, 344px);
@@ -88,7 +88,7 @@ const SimilarItemsTrack = styled.ul`
   }
 `
 
-const SimilarItemsScrollbar = styled.div`
+const SimilarProductsScrollbar = styled.div`
   display: none;
 
   @supports (scroll-timeline: --similar-items-scroll inline) and
@@ -104,7 +104,7 @@ const SimilarItemsScrollbar = styled.div`
   }
 `
 
-const SimilarItemsScrollbarSegment = styled.span`
+const SimilarProductsScrollbarSegment = styled.span`
   flex: 1 1 0;
   min-width: 0;
 
@@ -119,9 +119,9 @@ const SimilarItemsScrollbarSegment = styled.span`
 `
 
 export {
-  SimilarItemsScroller,
-  SimilarItemsScrollbar,
-  SimilarItemsScrollbarSegment,
-  SimilarItemsSection,
-  SimilarItemsTrack,
+  SimilarProductsScroller,
+  SimilarProductsScrollbar,
+  SimilarProductsScrollbarSegment,
+  SimilarProductsSection,
+  SimilarProductsTrack,
 }

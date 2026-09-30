@@ -1,5 +1,5 @@
-import { useProducts } from '../../context/useProducts'
-import ProductCardItem from '../ProductCardItem/ProductCardItem'
+import ProductCard from '../../components/ProductCard/ProductCard'
+import { useProducts } from '../../model/useProducts'
 import { ProductGrid, ProductListContainer } from './ProductList.styles'
 
 function ProductList() {
@@ -33,7 +33,7 @@ function ProductList() {
     <ProductListContainer className="container">
       <ProductGrid aria-label="Products list" role="list">
         {products.map((product, index) => (
-          <ProductCardItem
+          <ProductCard
             key={product.id}
             product={product}
             imageLoading={index < 5 ? 'eager' : 'lazy'}

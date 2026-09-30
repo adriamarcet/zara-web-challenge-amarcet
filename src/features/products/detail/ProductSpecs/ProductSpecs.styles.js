@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { MEDIA_QUERIES } from '../../../styles/breakpoints'
+import { MEDIA_QUERIES } from '../../../../shared/styles/breakpoints'
 
-const ProductDetailSpecsSection = styled.section`
+const ProductSpecsSection = styled.section`
   margin-block-start: var(--size-2xl);
 
   @media ${MEDIA_QUERIES.desktop} {
@@ -11,10 +11,10 @@ const ProductDetailSpecsSection = styled.section`
   }
 `
 
-const ProductDetailSpecsWrapper = styled.div`
+const ProductSpecsWrapper = styled.div`
   border-block-start: 1px solid var(--color-gray-90);
 `
-const ProductDetailSpecsView = styled.dl`
+const ProductSpecsView = styled.dl`
   display: grid;
   grid-template-columns: minmax(120px, 1fr) minmax(55%, 1fr);
   gap: var(--size-m);
@@ -35,8 +35,4 @@ const ProductDetailSpecsView = styled.dl`
     text-transform: uppercase;
   }
 `
-export {
-  ProductDetailSpecsSection,
-  ProductDetailSpecsView,
-  ProductDetailSpecsWrapper,
-}
+export { ProductSpecsSection, ProductSpecsView, ProductSpecsWrapper }

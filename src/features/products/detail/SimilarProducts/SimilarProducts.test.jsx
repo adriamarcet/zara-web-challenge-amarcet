@@ -4,7 +4,7 @@ import { cleanup, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, test } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 
-import ProductDetailSimilarItems from './ProductDetailSimilarItems'
+import SimilarProducts from './SimilarProducts'
 
 const products = [
   {
@@ -26,12 +26,12 @@ const products = [
 function renderSimilarItems(similarProducts = products) {
   return render(
     <MemoryRouter>
-      <ProductDetailSimilarItems products={similarProducts} />
+      <SimilarProducts products={similarProducts} />
     </MemoryRouter>
   )
 }
 
-describe('ProductDetailSimilarItems', () => {
+describe('SimilarProducts', () => {
   afterEach(() => {
     cleanup()
   })

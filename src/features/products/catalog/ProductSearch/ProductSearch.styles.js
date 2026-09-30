@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-const FilterComponent = styled.div`
+const ProductSearchContainer = styled.div`
   padding-block: 12px;
   margin-block-end: 15px;
 `
-const FilterInput = styled.input`
+const ProductSearchInput = styled.input`
   border: 0;
   border-bottom: 1px solid var(--color-gray-90);
   margin-block-end: 12px;
@@ -12,11 +12,11 @@ const FilterInput = styled.input`
   width: 100%;
 `
 
-const FilterInputWrap = styled.div`
+const ProductSearchInputWrapper = styled.div`
   position: relative;
 `
 
-const FilterClearButton = styled.button`
+const ProductSearchClearButton = styled.button`
   position: absolute;
   right: 0;
   top: 0;
@@ -25,4 +25,9 @@ const FilterClearButton = styled.button`
   cursor: pointer;
 `
 
-export { FilterComponent, FilterInputWrap, FilterInput, FilterClearButton }
+export {
+  ProductSearchClearButton,
+  ProductSearchContainer,
+  ProductSearchInput,
+  ProductSearchInputWrapper,
+}

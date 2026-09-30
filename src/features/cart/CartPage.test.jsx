@@ -4,8 +4,8 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { afterEach, describe, expect, test, vi } from 'vitest'
 
-import { CartContext } from '../../context/CartContext'
-import Header from '../Header'
+import Header from '../../app/layout/Header/Header'
+import { CartContext } from './model/CartContext'
 import CartPage from './CartPage'
 
 const cartItem = {

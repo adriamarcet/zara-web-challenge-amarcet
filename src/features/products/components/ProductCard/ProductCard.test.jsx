@@ -11,14 +11,14 @@ import { afterEach, describe, expect, test, vi } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 
 import { optimizeProductImage } from '../ProductImage/optimizeProductImage'
-import ProductCardItem from './ProductCardItem'
+import ProductCard from './ProductCard'
 
 vi.mock('../ProductImage/optimizeProductImage', () => ({
   optimizeProductImage: vi.fn(),
   revokeOptimizedImage: vi.fn(),
 }))
 
-describe('ProductCardItem', () => {
+describe('ProductCard', () => {
   afterEach(() => {
     cleanup()
     vi.clearAllMocks()
@@ -37,7 +37,7 @@ describe('ProductCardItem', () => {
     render(
       <MemoryRouter>
         <ul>
-          <ProductCardItem product={product} />
+          <ProductCard product={product} />
         </ul>
       </MemoryRouter>
     )

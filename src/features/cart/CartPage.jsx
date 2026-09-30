@@ -1,4 +1,4 @@
-import { useCart } from '../../context/useCart'
+import { useCart } from './model/useCart'
 import CartItem from './CartItem/CartItem'
 import CartSummary from './CartSummary/CartSummary'
 import ContinueShopping from './ContinueShopping/ContinueShopping'

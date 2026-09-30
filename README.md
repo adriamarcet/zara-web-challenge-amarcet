@@ -101,25 +101,77 @@ npm run build
 
 ## Architecture
 
-The project uses a small layered structure. It keeps shared infrastructure
-centralized while colocating each component with its styles and tests.
+The source follows a feature-first structure based on pragmatic vertical
+slices. Product and cart code are organized around business capabilities,
+while application composition and genuinely reusable infrastructure remain
+outside those features.
 
 ```text
 src/
-|-- components/       UI components grouped by screen or responsibility
-|-- context/          Product and cart state providers
-|-- layouts/          Shared route layout
-|-- services/         Products API access
-|-- styles/           Reset, utilities, tokens, and responsive breakpoints
-|-- utils/            Framework-independent helpers
-|-- App.jsx           Route definitions
-`-- main.jsx          Application providers and browser entry point
+|-- app/
+|   |-- main.jsx                         Browser entry point and providers
+|   |-- App.jsx                          Route composition
+|   |-- layout/
+|   |   |-- PageLayout.jsx               Shared route layout
+|   |   `-- Header/                      Application header and styles
+|   `-- routes/
+|       `-- NotFoundPage.jsx             Fallback route
+|-- features/
+|   |-- products/
+|   |   |-- api/                         Store API client and tests
+|   |   |-- model/                       Catalog context, provider, and hook
+|   |   |-- catalog/                     Search and product-list flow
+|   |   |-- detail/                      Product configuration and detail flow
+|   |   `-- components/                  Product UI shared inside the feature
+|   `-- cart/
+|       |-- model/                       Cart context, persistence, and hook
+|       |-- CartPage.jsx                 Cart route
+|       |-- CartItem/                    Configured cart line
+|       |-- CartSummary/                 Price summary and checkout action
+|       `-- ContinueShopping/            Navigation back to the catalog
+`-- shared/
+    |-- assets/                          Brand and cart icons
+    |-- lib/                             Framework-independent helpers
+    `-- styles/                          Reset, tokens, utilities, and breakpoints
 ```
+
+This is intentionally a lightweight interpretation of vertical slicing rather
+than a strict implementation of a formal architecture. Each feature owns the
+UI, state, and external boundaries needed by its workflows, but the project
+does not add extra layers or public barrel files where its size does not justify
+them.
+
+### Folder responsibilities
+
+- `app` is the composition root. It mounts global providers, declares routes,
+  and contains layout that belongs to the whole application.
+- `features/products` owns product retrieval and the catalog and detail user
+  journeys. `catalog` and `detail` contain flow-specific UI, while `components`
+  contains product presentation reused by more than one flow.
+- `features/cart` owns cart state, `localStorage` persistence, and the complete
+  cart screen. Its page and small UI groups remain at the feature root to avoid
+  unnecessary nesting.
+- `shared` contains only cross-feature resources with no business workflow of
+  their own: static assets, generic helpers, global CSS, design tokens, and
+  responsive breakpoints.
+
+Component tests and `*.styles.js` modules are colocated with the code they
+exercise. Service, provider, and shared utility tests follow the same rule. The
+repository does not use a separate global `tests` directory.
+
+Dependencies generally point from `app` to `features`, and from `features` to
+`shared`. A small number of direct feature-to-feature imports represent real
+workflow relationships: product detail adds configured items through the cart
+model, and cart items reuse the product image component.
 
 ### Data flow
 
 ```text
-Product UI -> ProductsProvider / ProductDetail -> productsService -> Store API
+main.jsx -> global providers -> App routes
+
+Catalog UI -> ProductsProvider -> productsService -> Store API
+Detail UI  -> productsService --------------------> Store API
+Detail UI  -> CartProvider -> localStorage
 Cart UI    -> CartProvider -> localStorage
 ```
 
@@ -143,8 +195,9 @@ while React Router provides explicit catalog, detail, cart, and fallback routes.
 ### State management
 
 React Context is used only for state shared across routes: the catalog and the
-cart. Product configuration remains local to the detail page. This avoids an
-additional state library for a deliberately small state model.
+cart. Their contexts, providers, and consumer hooks live in each feature's
+`model` directory. Product configuration remains local to the detail page. This
+avoids an additional state library for a deliberately small state model.
 
 ### Search and request lifecycle
 
@@ -161,10 +214,11 @@ independently.
 
 ### Styling and responsive behavior
 
-Visual components use styled-components, while global tokens, utilities, and
-breakpoints live under `src/styles`. The catalog progresses from one column on
-mobile to three on tablet and five once the viewport can support wide product
-cards.
+Visual components keep their styled-components definitions in colocated
+`*.styles.js` files. Global tokens, reset rules, utilities, and responsive
+breakpoints live under `src/shared/styles` and are loaded by the application
+entry point. The catalog progresses from one column on mobile to three on
+tablet and five once the viewport can support wide product cards.
 
 ### Product images
 
@@ -193,7 +247,26 @@ npm test -- --run
 
 Tests that render React components use jsdom and React Testing Library. Service
 tests mock `fetch`, while provider and component tests exercise observable user
-behavior and persistence boundaries.
+behavior and persistence boundaries. Every test is colocated with its source
+module inside the corresponding application, feature, or shared directory.
+
+## End-to-end tests with Playwright
+
+The first e2e test covers catalog navigation, storage and color selection,
+adding the configured phone, and the cart name, variant, image, price, count,
+and total. API and image responses are intercepted for deterministic results;
+the application UI, routing, and cart persistence run normally in Chromium.
+Each test starts with an isolated browser context and an empty cart.
+
+```bash
+npx playwright install chromium
+npm run test:e2e
+```
+
+Playwright starts the local Vite server automatically on port 5173. That port
+must be available. For interactive execution, use `npm run test:e2e:ui`.
+Failed tests retain a trace and screenshot in `test-results/`.
+Vitest excludes `e2e/`, so `npm test` continues to run the unit/component suite.
 
 ## Deployment
 
@@ -218,3 +291,9 @@ production output locally with:
 npm run build
 npm run preview
 ```
+
+## Author
+
+Developed by **Adrià Marcet**, frontend developer. Explore more of my work on
+[GitHub](https://github.com/adriamarcet) or contact me at
+[adriamarcetrovira@gmail.com](mailto:adriamarcetrovira@gmail.com).

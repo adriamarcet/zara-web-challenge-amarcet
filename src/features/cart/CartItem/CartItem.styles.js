@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { MEDIA_QUERIES } from '../../../styles/breakpoints'
-import ProductImage from '../../ProductImage/ProductImage'
+import ProductImage from '../../products/components/ProductImage/ProductImage'
+import { MEDIA_QUERIES } from '../../../shared/styles/breakpoints'
 
 export const CartItemElement = styled.li`
   display: grid;

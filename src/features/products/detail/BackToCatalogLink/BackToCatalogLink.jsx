@@ -1,11 +1,11 @@
 import {
-  ProductDetailBackNavElement,
-  ProductDetailBackNavLink,
-} from './ProductDetailBackNav.styles'
+  BackToCatalogNav,
+  BackToCatalogNavLink,
+} from './BackToCatalogLink.styles'
 
-const ProductDetailBackNav = () => (
-  <ProductDetailBackNavElement aria-label="Go back to see the list of products.">
-    <ProductDetailBackNavLink to="/" className="flex-inline">
+const BackToCatalogLink = () => (
+  <BackToCatalogNav aria-label="Go back to see the list of products.">
+    <BackToCatalogNavLink to="/" className="flex-inline">
       <svg
         width="20"
         height="20"
@@ -22,8 +22,8 @@ const ProductDetailBackNav = () => (
         />
       </svg>
       <span className="font-s text-uppercase">Back</span>
-    </ProductDetailBackNavLink>
-  </ProductDetailBackNavElement>
+    </BackToCatalogNavLink>
+  </BackToCatalogNav>
 )
 
-export default ProductDetailBackNav
+export default BackToCatalogLink

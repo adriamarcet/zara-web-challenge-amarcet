@@ -1,17 +1,17 @@
-import ProductCardItem from '../../ProductCardItem/ProductCardItem'
+import ProductCard from '../../components/ProductCard/ProductCard'
 import {
-  SimilarItemsScroller,
-  SimilarItemsScrollbar,
-  SimilarItemsScrollbarSegment,
-  SimilarItemsSection,
-  SimilarItemsTrack,
-} from './ProductDetailSimilarItems.styles'
+  SimilarProductsScroller,
+  SimilarProductsScrollbar,
+  SimilarProductsScrollbarSegment,
+  SimilarProductsSection,
+  SimilarProductsTrack,
+} from './SimilarProducts.styles'
 
-function ProductDetailSimilarItems({ products = [] }) {
+function SimilarProducts({ products = [] }) {
   if (!products.length) return null
 
   return (
-    <SimilarItemsSection aria-labelledby="similar-items-title">
+    <SimilarProductsSection aria-labelledby="similar-items-title">
       <h2
         id="similar-items-title"
         className="text-uppercase margin-block-end-2xl"
@@ -19,21 +19,21 @@ function ProductDetailSimilarItems({ products = [] }) {
         Similar items
       </h2>
 
-      <SimilarItemsScroller>
-        <SimilarItemsTrack aria-label="Similar products">
+      <SimilarProductsScroller>
+        <SimilarProductsTrack aria-label="Similar products">
           {products.map((product) => (
-            <ProductCardItem key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} />
           ))}
-        </SimilarItemsTrack>
+        </SimilarProductsTrack>
 
-        <SimilarItemsScrollbar aria-hidden="true">
+        <SimilarProductsScrollbar aria-hidden="true">
           {products.map((product) => (
-            <SimilarItemsScrollbarSegment key={product.id} />
+            <SimilarProductsScrollbarSegment key={product.id} />
           ))}
-        </SimilarItemsScrollbar>
-      </SimilarItemsScroller>
-    </SimilarItemsSection>
+        </SimilarProductsScrollbar>
+      </SimilarProductsScroller>
+    </SimilarProductsSection>
   )
 }
 
-export default ProductDetailSimilarItems
+export default SimilarProducts

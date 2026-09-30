@@ -4,7 +4,7 @@ import { cleanup, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, test } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 
-import { ProductsContext } from '../../context/ProductsContext'
+import { ProductsContext } from '../../model/ProductsContext'
 import ProductList from './ProductList'
 
 function renderProductList(value) {

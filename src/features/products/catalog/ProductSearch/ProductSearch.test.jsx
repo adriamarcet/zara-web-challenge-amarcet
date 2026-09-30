@@ -3,10 +3,10 @@
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, test, vi } from 'vitest'
 
-import { ProductsContext } from '../../context/ProductsContext'
-import Filter from './Filter'
+import { ProductsContext } from '../../model/ProductsContext'
+import ProductSearch from './ProductSearch'
 
-describe('Filter', () => {
+describe('ProductSearch', () => {
   afterEach(() => {
     cleanup()
     vi.useRealTimers()
@@ -17,7 +17,7 @@ describe('Filter', () => {
       <ProductsContext.Provider
         value={{ products: [], loading: false, setQuery: vi.fn() }}
       >
-        <Filter />
+        <ProductSearch />
       </ProductsContext.Provider>
     )
 
@@ -36,7 +36,7 @@ describe('Filter', () => {
       <ProductsContext.Provider
         value={{ products: [], loading: false, setQuery }}
       >
-        <Filter />
+        <ProductSearch />
       </ProductsContext.Provider>
     )
 
@@ -62,7 +62,7 @@ describe('Filter', () => {
       <ProductsContext.Provider
         value={{ products: [], loading: false, setQuery: vi.fn() }}
       >
-        <Filter />
+        <ProductSearch />
       </ProductsContext.Provider>
     )
 

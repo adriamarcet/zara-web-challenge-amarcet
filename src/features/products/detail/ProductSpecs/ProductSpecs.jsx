@@ -1,10 +1,10 @@
 import {
-  ProductDetailSpecsSection,
-  ProductDetailSpecsView,
-  ProductDetailSpecsWrapper,
-} from './ProductDetailSpecs.styles'
+  ProductSpecsSection,
+  ProductSpecsView,
+  ProductSpecsWrapper,
+} from './ProductSpecs.styles'
 
-const ProductDetailSpecs = ({ product }) => {
+const ProductSpecs = ({ product }) => {
   const SPECS = [
     ['Brand', product.brand],
     ['Name', product.name],
@@ -23,18 +23,18 @@ const ProductDetailSpecs = ({ product }) => {
   )
 
   return (
-    <ProductDetailSpecsSection>
+    <ProductSpecsSection>
       <h2 className="text-uppercase margin-block-end-2xl">Specifications</h2>
-      <ProductDetailSpecsWrapper>
+      <ProductSpecsWrapper>
         {availableSpecs.map(([label, value]) => (
-          <ProductDetailSpecsView key={label}>
+          <ProductSpecsView key={label}>
             <dt>{label}</dt>
             <dd>{value}</dd>
-          </ProductDetailSpecsView>
+          </ProductSpecsView>
         ))}
-      </ProductDetailSpecsWrapper>
-    </ProductDetailSpecsSection>
+      </ProductSpecsWrapper>
+    </ProductSpecsSection>
   )
 }
 
-export default ProductDetailSpecs
+export default ProductSpecs

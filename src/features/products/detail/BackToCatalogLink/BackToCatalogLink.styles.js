@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-const ProductDetailBackNavElement = styled.nav`
+const BackToCatalogNav = styled.nav`
   display: flex;
   padding-block: 12px;
 `
 
-const ProductDetailBackNavLink = styled(Link)`
+const BackToCatalogNavLink = styled(Link)`
   display: inline-flex;
   gap: var(--size-2xs);
   color: var(--color-text);
@@ -18,4 +18,4 @@ const ProductDetailBackNavLink = styled(Link)`
   }
 `
 
-export { ProductDetailBackNavElement, ProductDetailBackNavLink }
+export { BackToCatalogNav, BackToCatalogNavLink }

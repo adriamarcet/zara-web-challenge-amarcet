@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import { MEDIA_QUERIES } from '../../../styles/breakpoints'
-import ProductImage from '../../ProductImage/ProductImage'
+import { MEDIA_QUERIES } from '../../../../shared/styles/breakpoints'
+import ProductImage from '../../components/ProductImage/ProductImage'
 
 const HEADER_HEIGHT = 80
 const BACK_NAVIGATION_HEIGHT = 44
 const FEATURED_START_SEPARATION = 56
 
-const ProductDetailFeaturedWrapper = styled.section`
+const ProductConfiguratorWrapper = styled.section`
   padding-block-start: ${FEATURED_START_SEPARATION}px;
 
   @media ${MEDIA_QUERIES.desktop} {
@@ -14,7 +14,7 @@ const ProductDetailFeaturedWrapper = styled.section`
   }
 `
 
-const ProductDetailFeaturedElement = styled.div`
+const ProductConfiguratorElement = styled.div`
   align-items: center;
   display: grid;
   gap: var(--size-2xl);
@@ -42,7 +42,7 @@ const ProductDetailFeaturedElement = styled.div`
   }
 `
 
-const ProductDetailFeaturedImage = styled(ProductImage)`
+const ProductConfiguratorImage = styled(ProductImage)`
   aspect-ratio: 1;
   display: flex;
   max-width: 220px;
@@ -63,7 +63,7 @@ const ProductDetailFeaturedImage = styled(ProductImage)`
   }
 `
 
-const ProductDetailFeaturedMedia = styled.div`
+const ProductConfiguratorMedia = styled.div`
   display: flex;
   justify-content: flex-start;
 
@@ -77,7 +77,7 @@ const ProductDetailFeaturedMedia = styled.div`
   }
 `
 
-const ProductDetailFeaturedInfo = styled.div`
+const ProductConfiguratorInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--size-2xl);
@@ -91,7 +91,7 @@ const ProductDetailFeaturedInfo = styled.div`
   }
 `
 
-const ProductDetailFeaturedTitle = styled.h1`
+const ProductConfiguratorTitle = styled.h1`
   @media ${MEDIA_QUERIES.tablet} {
     font-size: var(--font-size-xl);
   }
@@ -101,7 +101,7 @@ const ProductDetailFeaturedTitle = styled.h1`
   }
 `
 
-const ProductDetailFeaturedPrice = styled.p`
+const ProductConfiguratorPrice = styled.p`
   @media ${MEDIA_QUERIES.tablet} {
     font-size: var(--font-size-m);
   }
@@ -111,7 +111,7 @@ const ProductDetailFeaturedPrice = styled.p`
   }
 `
 
-const ProductDetailFeaturedAction = styled.div`
+const ProductConfiguratorAction = styled.div`
   bottom: calc(var(--size-l) + env(safe-area-inset-bottom, 0px));
   position: sticky;
   z-index: 1;
@@ -124,12 +124,12 @@ const ProductDetailFeaturedAction = styled.div`
 `
 
 export {
-  ProductDetailFeaturedAction,
-  ProductDetailFeaturedElement,
-  ProductDetailFeaturedImage,
-  ProductDetailFeaturedInfo,
-  ProductDetailFeaturedMedia,
-  ProductDetailFeaturedPrice,
-  ProductDetailFeaturedTitle,
-  ProductDetailFeaturedWrapper,
+  ProductConfiguratorAction,
+  ProductConfiguratorElement,
+  ProductConfiguratorImage,
+  ProductConfiguratorInfo,
+  ProductConfiguratorMedia,
+  ProductConfiguratorPrice,
+  ProductConfiguratorTitle,
+  ProductConfiguratorWrapper,
 }

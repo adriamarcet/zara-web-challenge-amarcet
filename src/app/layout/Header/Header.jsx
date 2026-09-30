@@ -1,42 +1,14 @@
-import styled from 'styled-components'
-import { Link, useLocation } from 'react-router-dom'
-import logo from '../assets/logo.svg'
-import cartActive from '../assets/cartActive.svg'
-import cartInactive from '../assets/cartInactive.svg'
-import { useCart } from '../context/useCart'
-
-const HeaderElement = styled.header`
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  padding: 26px 0 25px;
-`
-const HeaderContent = styled.div`
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-`
-const HeaderLogo = styled.a``
-const HeaderAction = styled(Link)`
-  align-items: center;
-  color: var(--color-text);
-  cursor: pointer;
-  display: flex;
-  font-size: var(--font-size-l);
-  font-weight: var(--font-weight-light);
-  gap: var(--size-2xs);
-  line-height: 1;
-  text-decoration: none;
-
-  &:hover {
-    color: var(--color-text);
-  }
-
-  &:focus-visible {
-    outline: 2px solid #0057ff;
-    outline-offset: 2px;
-  }
-`
+import { useLocation } from 'react-router-dom'
+import { useCart } from '../../../features/cart/model/useCart'
+import cartActive from '../../../shared/assets/cartActive.svg'
+import cartInactive from '../../../shared/assets/cartInactive.svg'
+import logo from '../../../shared/assets/logo.svg'
+import {
+  HeaderAction,
+  HeaderContent,
+  HeaderElement,
+  HeaderLogo,
+} from './Header.styles'
 
 const Header = function () {
   const { itemCount } = useCart()

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { useCart } from '../../context/useCart'
-import productsService from '../../services/productsService'
-import ProductDetailBackNav from './ProductDetailBackNav/ProductDetailBackNav'
-import ProductDetailFeatured from './ProductDetailFeatured/ProductDetailFeatured'
-import ProductDetailSimilarItems from './ProductDetailSimilarItems/ProductDetailSimilarItems'
-import ProductDetailSpecs from './ProductDetailSpecs/ProductDetailSpecs'
+import { useCart } from '../../cart/model/useCart'
+import productsService from '../api/productsService'
+import BackToCatalogLink from './BackToCatalogLink/BackToCatalogLink'
+import ProductConfigurator from './ProductConfigurator/ProductConfigurator'
+import ProductSpecs from './ProductSpecs/ProductSpecs'
+import SimilarProducts from './SimilarProducts/SimilarProducts'
 
 function ProductDetail() {
   const { productId } = useParams()
@@ -101,8 +101,8 @@ function ProductDetail() {
 
   return (
     <article className="container">
-      <ProductDetailBackNav />
-      <ProductDetailFeatured
+      <BackToCatalogLink />
+      <ProductConfigurator
         product={product}
         image={image}
         selectedCapacity={selectedCapacity}
@@ -113,8 +113,8 @@ function ProductDetail() {
         canAddToCart={canAddToCart}
         onAddToCart={handleAddToCart}
       />
-      <ProductDetailSpecs product={product} />
-      <ProductDetailSimilarItems products={product.similarProducts} />
+      <ProductSpecs product={product} />
+      <SimilarProducts products={product.similarProducts} />
     </article>
   )
 }

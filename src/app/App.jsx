@@ -1,20 +1,12 @@
-import { Link, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
-import PageLayout from './layouts/PageLayout'
-import Header from './components/Header'
-import ProductList from './components/ProductList/ProductList'
-import Filter from './components/Filter/Filter'
-import ProductDetail from './components/ProductDetail/ProductDetail'
-import CartPage from './components/Cart/CartPage'
-
-function NotFound() {
-  return (
-    <section className="container">
-      <h1>Page not found</h1>
-      <Link to="/">Go back to main page.</Link>
-    </section>
-  )
-}
+import CartPage from '../features/cart/CartPage'
+import ProductList from '../features/products/catalog/ProductList/ProductList'
+import ProductSearch from '../features/products/catalog/ProductSearch/ProductSearch'
+import ProductDetail from '../features/products/detail/ProductDetail'
+import Header from './layout/Header/Header'
+import PageLayout from './layout/PageLayout'
+import NotFoundPage from './routes/NotFoundPage'
 
 function App() {
   return (
@@ -26,14 +18,14 @@ function App() {
             path="/"
             element={
               <>
-                <Filter />
+                <ProductSearch />
                 <ProductList />
               </>
             }
           />
           <Route path="/products/:productId" element={<ProductDetail />} />
           <Route path="/cart" element={<CartPage />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </>
