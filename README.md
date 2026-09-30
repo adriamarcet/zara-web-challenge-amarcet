@@ -6,6 +6,12 @@ a product, browse similar items, and manage a persistent shopping cart.
 
 **Live demo:** <https://amarcet-napptilus-challenge.netlify.app/>
 
+![Product catalog with live search and results count](docs/catalog.webp)
+
+| Product detail                                                      | Cart                                                |
+| ------------------------------------------------------------------- | --------------------------------------------------- |
+| ![Product detail with storage and color selectors](docs/detail.png) | ![Cart with total and remove action](docs/cart.png) |
+
 ## Features
 
 - Product catalog limited to 20 results, with server-side search and a result
@@ -187,6 +193,10 @@ Cart UI    -> CartProvider -> localStorage
 
 - `productsService` owns the API base URL, query parameters, error handling,
   deduplication, and `x-api-key` header.
+- The API returns a duplicated record (`XMI-RN13P5G`, Redmi Note 13 Pro 5G) in
+  its 24-item catalog, so `limit=20` alone would yield only 19 unique products.
+  `productsService` requests twice the limit, deduplicates by `id`, and keeps the
+  first 20, so the catalog always shows 20 distinct phones.
 - `ProductsProvider` is mounted only by the catalog route. It fetches the
   catalog and exposes loading, error, products, and search state.
 - `useProductDetail` manages product loading, errors, and request cancellation.
