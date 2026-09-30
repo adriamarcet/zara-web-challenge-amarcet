@@ -56,6 +56,24 @@ describe('productsService.getAll', () => {
     expect(new URL(url).searchParams.get('search')).toBe('iphone')
   })
 
+  test('deduplicates by id and returns at most 20 products', async () => {
+    const products = Array.from({ length: 24 }, (_, index) => ({
+      id: `P${index}`,
+    }))
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: vi.fn().mockResolvedValue([products[0], ...products]),
+    })
+    vi.stubGlobal('fetch', fetchMock)
+
+    const result = await productsService.getAll()
+
+    const [url] = fetchMock.mock.calls[0]
+    expect(Number(new URL(url).searchParams.get('limit'))).toBeGreaterThan(20)
+    expect(result).toHaveLength(20)
+    expect(new Set(result.map((product) => product.id)).size).toBe(20)
+  })
+
   test('throws an error when the response is not ok', async () => {
     const fetchMock = vi.fn().mockResolvedValue({ ok: false })
     vi.stubGlobal('fetch', fetchMock)

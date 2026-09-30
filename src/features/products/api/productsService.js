@@ -1,6 +1,7 @@
 const baseUrl = 'https://prueba-tecnica-api-tienda-moviles.onrender.com'
 
 const LIMIT = 20
+const FETCH_LIMIT = LIMIT * 2
 
 const getAll = async ({ search = '', signal } = {}) => {
   const options = {
@@ -11,7 +12,7 @@ const getAll = async ({ search = '', signal } = {}) => {
     signal,
   }
 
-  const params = new URLSearchParams({ limit: LIMIT })
+  const params = new URLSearchParams({ limit: FETCH_LIMIT })
   if (search) params.set('search', search)
 
   const response = await fetch(`${baseUrl}/products?${params}`, options)
@@ -21,7 +22,10 @@ const getAll = async ({ search = '', signal } = {}) => {
   }
 
   const data = await response.json()
-  return [...new Map(data.map((product) => [product.id, product])).values()]
+  const unique = [
+    ...new Map(data.map((product) => [product.id, product])).values(),
+  ]
+  return unique.slice(0, LIMIT)
 }
 
 const getById = async (id, { signal } = {}) => {
