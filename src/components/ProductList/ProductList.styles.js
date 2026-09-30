@@ -21,15 +21,15 @@ const ProductGrid = styled.ul`
     border-block-start: 1px solid var(--color-gray-90);
     border-inline-start: 1px solid var(--color-gray-90);
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 
     > li {
       border-inline-end: 1px solid var(--color-gray-90);
     }
   }
 
-  @media ${MEDIA_QUERIES.desktop} {
-    grid-template-columns: repeat(5, 1fr);
+  @media ${MEDIA_QUERIES.wideDesktop} {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 `
 

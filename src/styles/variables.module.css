@@ -1,11 +1,13 @@
 @value breakpointMobile: 393px;
 @value breakpointTablet: 768px;
 @value breakpointDesktop: 1024px;
+@value breakpointWideDesktop: 1420px;
 
 :root {
   --breakpoint-mobile: breakpointMobile;
   --breakpoint-tablet: breakpointTablet;
   --breakpoint-desktop: breakpointDesktop;
+  --breakpoint-wide-desktop: breakpointWideDesktop;
 
   --color-white: #ffffff;
   --color-gray-10: #f3f2f2;

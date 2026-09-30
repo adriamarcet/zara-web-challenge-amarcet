@@ -7,12 +7,14 @@ describe('breakpoints', () => {
       mobile: '393px',
       tablet: '768px',
       desktop: '1024px',
+      wideDesktop: '1420px',
     })
 
     expect(MEDIA_QUERIES).toEqual({
       mobile: '(min-width: 393px)',
       tablet: '(min-width: 768px)',
       desktop: '(min-width: 1024px)',
+      wideDesktop: '(min-width: 1420px)',
     })
   })
 })
